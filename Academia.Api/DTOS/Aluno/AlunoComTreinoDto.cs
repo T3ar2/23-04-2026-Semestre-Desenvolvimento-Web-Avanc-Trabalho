@@ -1,8 +1,9 @@
 
 using System.ComponentModel.DataAnnotations;
+using Academia.Api.DTOs;
 
 namespace Academia.Api.Models;
-public class Aluno {
+public class AlunoComTreinoDto {
     public int Id {get; set;}
 
     [Required(ErrorMessage = "O nome é obrigatório.")]
@@ -16,5 +17,6 @@ public class Aluno {
     [EmailAddress(ErrorMessage = "O email tem que ser válido.")]
     public string? Email {get; set;}
     public DateTime Nascimento {get; set;}
-    public List<Treino>? Treinos { get; set; }
+    public List<TreinoDto> Treinos { get; set; } = new();
+
 }

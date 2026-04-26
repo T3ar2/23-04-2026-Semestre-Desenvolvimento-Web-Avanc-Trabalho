@@ -2,9 +2,10 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.EntityFrameworkCore;
 using Academia.Api.Models;
-using PrimeiraApi.Services;
+using Academia.Api.Services;
 using System.Text;
 using Microsoft.OpenApi.Models;
+using Academia.Api.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 

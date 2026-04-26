@@ -1,5 +1,3 @@
-
-
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -20,4 +18,5 @@ public class Treino
     public Exercicio? Exercicio { set; get; }
     public int Series { set; get; }
     public int Repeticoes { set; get; } 
+     public List<Exercicio>? Exercicios { get; set; } 
 }
