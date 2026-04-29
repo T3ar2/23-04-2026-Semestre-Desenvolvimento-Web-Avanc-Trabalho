@@ -24,10 +24,10 @@ public class AuthController : ControllerBase {
         var usuario = await ctx.Usuarios
             .FirstOrDefaultAsync(u => u.Login == dto.Login);
 
-        if (!Verify(dto.Senha, usuario.SenhaHash))
+        if (usuario == null || !Verify(dto.Senha, usuario.SenhaHash))
             return Unauthorized(new { message = "Usuário ou senha inválidos" });
 
-        var token = _tokenService.GenerateToken(usuario.Login);
+        var token = _tokenService.GenerateToken(usuario.Login!);
 
         return Ok(new {
             token,

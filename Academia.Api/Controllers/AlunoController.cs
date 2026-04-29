@@ -6,23 +6,28 @@ using Academia.Api.DTOs;
 using Microsoft.AspNetCore.Authorization;
 
 namespace Academia.Api.Controllers;
+
 [Authorize]
 [ApiController]
 [Route("api/[controller]")]
-public class AlunoController : ControllerBase {
+public class AlunoController : ControllerBase
+{
     private readonly AppDbContext ctx;
 
-    public AlunoController(AppDbContext context) {
+    public AlunoController(AppDbContext context)
+    {
         ctx = context;
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<AlunoDto>>> GetAllAsync() {
+    public async Task<ActionResult<IEnumerable<AlunoDto>>> GetAllAsync()
+    {
         var alunos = await ctx.Alunos
             .AsNoTracking()
             .ToListAsync();
 
-        var result = alunos.Select(a => new AlunoDto {
+        var result = alunos.Select(a => new AlunoDto
+        {
             Id = a.Id,
             Nome = a.Nome,
             Cpf = a.Cpf,
@@ -34,7 +39,8 @@ public class AlunoController : ControllerBase {
     }
 
     [HttpGet("{id:int}", Name = "GetAlunoById")]
-    public async Task<ActionResult<AlunoDto>> GetByIdAsync(int id) {
+    public async Task<ActionResult<AlunoDto>> GetByIdAsync(int id)
+    {
         var aluno = await ctx.Alunos
             .AsNoTracking()
             .FirstOrDefaultAsync(c => c.Id == id);
@@ -42,7 +48,8 @@ public class AlunoController : ControllerBase {
         if (aluno is null)
             return NotFound();
 
-        var result = new AlunoDto {
+        var result = new AlunoDto
+        {
             Id = aluno.Id,
             Nome = aluno.Nome,
             Cpf = aluno.Cpf,
@@ -54,11 +61,13 @@ public class AlunoController : ControllerBase {
     }
 
     [HttpPost]
-    public async Task<ActionResult<AlunoDto>> CreateAsync(AlunoCreateDto dto) {
+    public async Task<ActionResult<AlunoDto>> CreateAsync(AlunoCreateDto dto)
+    {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
 
-        var aluno = new Aluno {
+        var aluno = new Aluno
+        {
             Nome = dto.Nome,
             Cpf = dto.Cpf,
             Email = dto.Email,
@@ -67,7 +76,8 @@ public class AlunoController : ControllerBase {
         ctx.Alunos.Add(aluno);
         await ctx.SaveChangesAsync();
 
-        var result = new AlunoDto {
+        var result = new AlunoDto
+        {
             Id = aluno.Id,
             Nome = aluno.Nome,
             Cpf = aluno.Cpf,
@@ -79,7 +89,8 @@ public class AlunoController : ControllerBase {
     }
 
     [HttpPut("{id:int}")]
-    public async Task<IActionResult> UpdateAsync(int id, AlunoUpdateDto dto) {
+    public async Task<IActionResult> UpdateAsync(int id, AlunoUpdateDto dto)
+    {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
 
@@ -99,7 +110,8 @@ public class AlunoController : ControllerBase {
     }
 
     [HttpDelete("{id:int}")]
-    public async Task<IActionResult> DeleteAsync(int id) {
+    public async Task<IActionResult> DeleteAsync(int id)
+    {
         var aluno = await ctx.Alunos.FindAsync(id);
 
         if (aluno is null)
@@ -111,26 +123,30 @@ public class AlunoController : ControllerBase {
         return NoContent();
     }
 
-     [HttpGet("{id:int}/treino")]
-    public async Task<ActionResult<AlunoComTreinoDto>> GetAlunoComTreinoAsync(int id) {
+    [HttpGet("{id:int}/treino")]
+    public async Task<ActionResult<AlunoComTreinoDto>> GetAlunoComTreinoAsync(int id)
+    {
         var aluno = await ctx.Alunos
             .Include(a => a.Treinos)
+            .ThenInclude(t => t.Exercicio)
             .AsNoTracking()
             .FirstOrDefaultAsync(a => a.Id == id);
 
         if (aluno is null)
             return NotFound();
 
-        var result = new AlunoComTreinoDto {
+        var result = new AlunoComTreinoDto
+        {
             Id = aluno.Id,
             Nome = aluno.Nome,
             Cpf = aluno.Cpf,
             Email = aluno.Email,
             Nascimento = aluno.Nascimento,
-            Treinos = aluno.Treinos.Select(t => new TreinoDto {
+            Treinos = aluno.Treinos.Select(t => new TreinoDto
+            {
                 Id = t.Id,
                 NomeTreino = t.NomeTreino,
-                // NomeExercicio = t.NomeExercicio, - N sei o pq n esta funcionando
+                NomeExercicio = t.Exercicio?.Nome,
                 Series = t.Series,
                 Repeticoes = t.Repeticoes
             }).ToList()

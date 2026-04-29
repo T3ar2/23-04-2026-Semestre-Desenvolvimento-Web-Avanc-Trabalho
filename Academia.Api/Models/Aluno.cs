@@ -16,5 +16,5 @@ public class Aluno {
     [EmailAddress(ErrorMessage = "O email tem que ser válido.")]
     public string? Email {get; set;}
     public DateTime Nascimento {get; set;}
-    public List<Treino>? Treinos { get; set; }
+    public List<Treino> Treinos { get; set; } = new List<Treino>();
 }
