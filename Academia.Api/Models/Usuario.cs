@@ -1,16 +1,7 @@
-
-using System.ComponentModel.DataAnnotations;
-
 namespace Academia.Api.Models;
-
-public class Usuario
-{
+public class Usuario{
     public int Id { get; set; }
-
-    [Required]
-    public string? Username { get; set; }
-
-    [Required]
-    [StringLength(100, MinimumLength = 6)]
-    public string? Senha { get; set; }
+    public string Login { get; set; } = string.Empty;
+    public string SenhaHash { get; set; } = string.Empty;
+    public string Nome { get; set; } = string.Empty;
 }
