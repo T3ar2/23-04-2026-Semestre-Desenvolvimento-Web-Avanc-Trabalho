@@ -1,41 +1,21 @@
-# Prerequisites
-*.d
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docuser
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+build/
 
-# Precompiled Headers
-*.gch
-*.pch
+# Visual Studio / VS Code folders
+.vs/
+.vscode/
 
-# Linker files
-*.ilk
-
-# Debugger Files
-*.pdb
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
-
-# debug information files
-*.dwo
+# Project artifacts
+obj/
+bin/
