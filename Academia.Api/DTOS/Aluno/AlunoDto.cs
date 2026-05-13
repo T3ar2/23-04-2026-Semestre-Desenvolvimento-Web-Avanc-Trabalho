@@ -1,19 +1,53 @@
-
 using System.ComponentModel.DataAnnotations;
 
-namespace Academia.Api.DTOs;
-public class AlunoDto 
+namespace Academia.Api.DTOs
 {
-    public int Id {get; set;}
-    [Required(ErrorMessage = "O nome é obrigatório.")]
-    [StringLength(100, MinimumLength = 3, ErrorMessage = "O nome deve ter entre 3 e 100 caracteres")]
-    public string? Nome {get; set;}
+    public class AlunoCreateDto
+    {
+        [Required(ErrorMessage = "Nome é obrigatório")]
+        [MaxLength(150, ErrorMessage = "Nome deve ter no máximo 150 caracteres")]
+        public string Nome { get; set; } = string.Empty;
 
-    [Required(ErrorMessage = "O Cpf é obrigatório.")]
-    [RegularExpression(@"^\d{3}\.\d{3}\.\d{3}-\d{2}$", ErrorMessage = "Formato de CPF inválido (000.000.000-00)")]
-    public string? Cpf {get; set;}
-    [Required(ErrorMessage = "O email é obrigatório.")]
-    [EmailAddress(ErrorMessage = "O email tem que ser válido.")]
-    public string? Email {get; set;}
-    public DateTime Nascimento {get; set;}
+        [Required(ErrorMessage = "Email é obrigatório")]
+        [EmailAddress(ErrorMessage = "Email inválido")]
+        [MaxLength(150, ErrorMessage = "Email deve ter no máximo 150 caracteres")]
+        public string Email { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = "Senha é obrigatória")]
+        [MinLength(6, ErrorMessage = "Senha deve ter no mínimo 6 caracteres")]
+        public string Senha { get; set; } = string.Empty;
+
+        [MaxLength(20, ErrorMessage = "Telefone deve ter no máximo 20 caracteres")]
+        public string? Telefone { get; set; }
+
+        [Required(ErrorMessage = "Data de nascimento é obrigatória")]
+        public DateTime DataNascimento { get; set; }
+
+        [Required(ErrorMessage = "Plano é obrigatório")]
+        public int PlanoId { get; set; }
+    }
+
+    public class AlunoUpdateDto
+    {
+        [Required(ErrorMessage = "Nome é obrigatório")]
+        [MaxLength(150, ErrorMessage = "Nome deve ter no máximo 150 caracteres")]
+        public string Nome { get; set; } = string.Empty;
+
+        [MaxLength(20, ErrorMessage = "Telefone deve ter no máximo 20 caracteres")]
+        public string? Telefone { get; set; }
+
+        [Required(ErrorMessage = "Plano é obrigatório")]
+        public int PlanoId { get; set; }
+    }
+
+    public class AlunoResponseDto
+    {
+        public int Id { get; set; }
+        public string Nome { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+        public string? Telefone { get; set; }
+        public DateTime DataNascimento { get; set; }
+        public int PlanoId { get; set; }
+        public string? PlanoNome { get; set; }
+    }
 }
