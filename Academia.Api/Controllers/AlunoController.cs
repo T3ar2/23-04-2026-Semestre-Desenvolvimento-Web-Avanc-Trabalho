@@ -127,8 +127,8 @@ public class AlunoController : ControllerBase
     public async Task<ActionResult<AlunoComTreinoDto>> GetAlunoComTreinoAsync(int id)
     {
         var aluno = await ctx.Alunos
-            .Include(a => a.Treinos)
-            .ThenInclude(t => t.Exercicio)
+            .Include(a => a.PlanosTreinos)
+            .ThenInclude(t => t.ExerciciosPlanejados)
             .AsNoTracking()
             .FirstOrDefaultAsync(a => a.Id == id);
 
@@ -142,13 +142,13 @@ public class AlunoController : ControllerBase
             Cpf = aluno.Cpf,
             Email = aluno.Email,
             Nascimento = aluno.Nascimento,
-            Treinos = aluno.Treinos.Select(t => new TreinoDto
+            PlanosTreinos = aluno.PlanosTreinos.Select(t => new PlanoTreino
             {
                 Id = t.Id,
                 NomeTreino = t.NomeTreino,
-                NomeExercicio = t.Exercicio?.Nome,
-                Series = t.Series,
-                Repeticoes = t.Repeticoes
+                AlunoId = t.AlunoId,
+                Aluno = t.Aluno,
+                ExerciciosPlanejados = t.ExerciciosPlanejados
             }).ToList()
         };
 

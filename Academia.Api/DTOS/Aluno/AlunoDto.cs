@@ -1,5 +1,6 @@
 
 using System.ComponentModel.DataAnnotations;
+using Academia.Api.Models;
 
 namespace Academia.Api.DTOs;
 
