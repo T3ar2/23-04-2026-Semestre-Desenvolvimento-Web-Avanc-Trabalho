@@ -3,8 +3,7 @@ using Academia.Api.Data;
 using Academia.Api.Models;
 using Academia.Api.DTOs;
 using Microsoft.AspNetCore.Authorization;
-using System.Threading.Tasks;
-
+using Microsoft.EntityFrameworkCore;
 namespace Academia.Api.Controllers;
 
 [Authorize]
@@ -69,7 +68,7 @@ public class RegistroTreinoController : ControllerBase
             ExerciciosRealizados = r.ExerciciosRealizados.Select(e => new ExercicioRealizadoResponseDto
             {
                 ExercicioId = e.ExercicioId,
-                NomeExercicio = e.Exercicio.Nome,
+                NomeExercicio = e.Exercicio!.Nome,
                 Series = e.Series,
                 Repeticoes = e.Repeticoes,
                 Carga = e.Carga
@@ -104,7 +103,7 @@ public class RegistroTreinoController : ControllerBase
             var exercicioDto = new ExercicioRealizadoResponseDto 
             {
                 ExercicioId = item.ExercicioId,
-                NomeExercicio = item.Exercicio.Nome,
+                NomeExercicio = item.Exercicio!.Nome,
                 Series = item.Series,
                 Repeticoes = item.Repeticoes,
                 Carga = item.Carga

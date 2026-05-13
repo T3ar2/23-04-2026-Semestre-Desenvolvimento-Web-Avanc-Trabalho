@@ -40,7 +40,7 @@ public class PlanoTreinoController : ControllerBase
                 Repeticoes = exercicio.Repeticoes
             };
             
-            planoTreino.ExerciciosPlanejados.Add(plano);
+            planoTreino.ExerciciosPlanejados!.Add(plano);
         }
 
         ctx.PlanosTreino.Add(planoTreino);
@@ -53,7 +53,7 @@ public class PlanoTreinoController : ControllerBase
     public async Task<ActionResult<IEnumerable<PlanoTreinoDto>>> GetAllAsync()
     {
         var treinos = await ctx.PlanosTreino
-            .Include(t => t.ExerciciosPlanejados)
+            .Include(t => t.ExerciciosPlanejados!)
             .ThenInclude(r => r.Exercicio)
             .AsNoTracking()
             .ToListAsync();
@@ -63,10 +63,10 @@ public class PlanoTreinoController : ControllerBase
             Id = t.Id,
             NomeTreino = t.NomeTreino,
             AlunoId = t.AlunoId,
-            ExerciciosPlanejados = t.ExerciciosPlanejados.Select(r => new ExercicioPlanejadoResponseDto
+            ExerciciosPlanejados = t.ExerciciosPlanejados!.Select(r => new ExercicioPlanejadoResponseDto
             {
                 ExercicioId = r.ExercicioId,
-                NomeExercicio = r.Exercicio.Nome,
+                NomeExercicio = r.Exercicio?.Nome ?? "Sem nome",
                 Series = r.Series,
                 Repeticoes = r.Repeticoes
             }).ToList()
@@ -79,7 +79,7 @@ public class PlanoTreinoController : ControllerBase
     public async Task<ActionResult<PlanoTreinoDto>> GetByIdAsync(int id)
     {
         var planoTreino = await ctx.PlanosTreino
-            .Include(t => t.ExerciciosPlanejados)
+            .Include(t => t.ExerciciosPlanejados!)
             .ThenInclude(r => r.Exercicio)
             .AsNoTracking()
             .FirstOrDefaultAsync(t => t.Id == id);
@@ -94,12 +94,12 @@ public class PlanoTreinoController : ControllerBase
             AlunoId = planoTreino.AlunoId
         };
 
-        foreach (var item in planoTreino.ExerciciosPlanejados)
+        foreach (var item in planoTreino.ExerciciosPlanejados!)
         {
             var exercicioDto = new ExercicioPlanejadoResponseDto 
             {
                 ExercicioId = item.ExercicioId,
-                NomeExercicio = item.Exercicio.Nome,
+                NomeExercicio = item.Exercicio?.Nome ?? "Sem nome",
                 Series = item.Series,
                 Repeticoes = item.Repeticoes
             };
@@ -130,7 +130,7 @@ public class PlanoTreinoController : ControllerBase
         planoTreino.NomeTreino = dto.NomeTreino;
         planoTreino.AlunoId = dto.AlunoId;
 
-        planoTreino.ExerciciosPlanejados.Clear();
+        planoTreino.ExerciciosPlanejados?.Clear();
 
         foreach (var item in dto.ExerciciosPlanejados)
         {
@@ -141,7 +141,7 @@ public class PlanoTreinoController : ControllerBase
                 Repeticoes = item.Repeticoes
             };
             
-            planoTreino.ExerciciosPlanejados.Add(novoItem);
+            planoTreino.ExerciciosPlanejados?.Add(novoItem);
         }
 
         await ctx.SaveChangesAsync();
