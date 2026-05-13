@@ -27,7 +27,7 @@ public class AuthController : ControllerBase {
         if (usuario == null || !Verify(dto.Senha, usuario.SenhaHash))
             return Unauthorized(new { message = "Usuário ou senha inválidos" });
 
-        var token = _tokenService.GenerateToken(usuario.Login!);
+        var token = _tokenService.GenerateToken(usuario.Login!, usuario.Role);
 
         return Ok(new {
             token,
