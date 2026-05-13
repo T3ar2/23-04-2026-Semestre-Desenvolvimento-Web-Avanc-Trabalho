@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using static BCrypt.Net.BCrypt;
 using Academia.Api.Data;
 using Academia.Api.Services;
-using Academia.Api.Dtos;
+using Academia.Api.DTOs;
 
 namespace Academia.Api.Controllers;
 

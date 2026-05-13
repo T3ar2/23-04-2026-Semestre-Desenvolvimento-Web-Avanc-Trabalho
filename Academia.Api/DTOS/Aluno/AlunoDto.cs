@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 
 namespace Academia.Api.DTOs;
+
 public class AlunoDto 
 {
     public int Id {get; set;}

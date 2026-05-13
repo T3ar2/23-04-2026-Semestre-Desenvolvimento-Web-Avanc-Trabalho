@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations;
-namespace Academia.Api.Dtos;
+namespace Academia.Api.DTOs;
 public class LoginDto {
     [Required(ErrorMessage = "Login é obrigatório.")]
     public string Login { get; set; } = string.Empty;
