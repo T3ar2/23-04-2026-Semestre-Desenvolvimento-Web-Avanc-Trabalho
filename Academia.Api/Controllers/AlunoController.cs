@@ -1,134 +1,157 @@
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Academia.Api.Data;
-using Academia.Api.DTOs;
 using Academia.Api.Models;
+using Academia.Api.DTOs;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 
-namespace Academia.Api.Controllers
+namespace Academia.Api.Controllers;
+
+[Authorize]
+[ApiController]
+[Route("api/[controller]")]
+public class AlunoController : ControllerBase
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    [Authorize]
-    public class AlunoController : ControllerBase
+    private readonly AppDbContext ctx;
+
+    public AlunoController(AppDbContext context)
     {
-        private readonly AppDbContext _context;
+        ctx = context;
+    }
 
-        public AlunoController(AppDbContext context)
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<AlunoDto>>> GetAllAsync()
+    {
+        var alunos = await ctx.Alunos
+            .AsNoTracking()
+            .ToListAsync();
+
+        var result = alunos.Select(a => new AlunoDto
         {
-            _context = context;
-        }
+            Id = a.Id,
+            Nome = a.Nome,
+            Cpf = a.Cpf,
+            Email = a.Email,
+            Nascimento = a.Nascimento
+        });
 
-        [HttpGet]
-        public async Task<IActionResult> GetAll()
+        return Ok(result);
+    }
+
+    [HttpGet("{id:int}", Name = "GetAlunoById")]
+    public async Task<ActionResult<AlunoDto>> GetByIdAsync(int id)
+    {
+        var aluno = await ctx.Alunos
+            .AsNoTracking()
+            .FirstOrDefaultAsync(c => c.Id == id);
+
+        if (aluno is null)
+            return NotFound();
+
+        var result = new AlunoDto
         {
-            var alunos = await _context.Alunos
-                .Include(a => a.Plano)
-                .Select(a => new AlunoResponseDto
-                {
-                    Id = a.Id,
-                    Nome = a.Nome,
-                    Email = a.Email,
-                    Telefone = a.Telefone,
-                    DataNascimento = a.DataNascimento,
-                    PlanoId = a.PlanoId,
-                    PlanoNome = a.Plano != null ? a.Plano.Nome : null
-                })
-                .ToListAsync();
+            Id = aluno.Id,
+            Nome = aluno.Nome,
+            Cpf = aluno.Cpf,
+            Email = aluno.Email,
+            Nascimento = aluno.Nascimento
+        };
 
-            return Ok(alunos);
-        }
+        return Ok(result);
+    }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
+    [HttpPost]
+    public async Task<ActionResult<AlunoDto>> CreateAsync(AlunoCreateDto dto)
+    {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
+        var aluno = new Aluno
         {
-            var aluno = await _context.Alunos
-                .Include(a => a.Plano)
-                .FirstOrDefaultAsync(a => a.Id == id);
+            Nome = dto.Nome,
+            Cpf = dto.Cpf,
+            Email = dto.Email,
+            Nascimento = dto.Nascimento
+        };
+        ctx.Alunos.Add(aluno);
+        await ctx.SaveChangesAsync();
 
-            if (aluno == null)
-                return NotFound(new { message = "Aluno não encontrado" });
+        var result = new AlunoDto
+        {
+            Id = aluno.Id,
+            Nome = aluno.Nome,
+            Cpf = aluno.Cpf,
+            Email = aluno.Email,
+            Nascimento = aluno.Nascimento
+        };
 
-            return Ok(new AlunoResponseDto
+        return CreatedAtRoute("GetAlunoById", new { id = aluno.Id }, result);
+    }
+
+    [HttpPut("{id:int}")]
+    public async Task<IActionResult> UpdateAsync(int id, AlunoUpdateDto dto)
+    {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
+        var aluno = await ctx.Alunos.FindAsync(id);
+
+        if (aluno is null)
+            return NotFound();
+
+        aluno.Nome = dto.Nome;
+        aluno.Cpf = dto.Cpf;
+        aluno.Email = dto.Email;
+        aluno.Nascimento = dto.Nascimento;
+
+        await ctx.SaveChangesAsync();
+
+        return NoContent();
+    }
+
+    [HttpDelete("{id:int}")]
+    public async Task<IActionResult> DeleteAsync(int id)
+    {
+        var aluno = await ctx.Alunos.FindAsync(id);
+
+        if (aluno is null)
+            return NotFound();
+
+        ctx.Alunos.Remove(aluno);
+        await ctx.SaveChangesAsync();
+
+        return NoContent();
+    }
+
+    [HttpGet("{id:int}/treino")]
+    public async Task<ActionResult<AlunoComTreinoDto>> GetAlunoComTreinoAsync(int id)
+    {
+        var aluno = await ctx.Alunos
+            .Include(a => a.Treinos)
+            .ThenInclude(t => t.Exercicio)
+            .AsNoTracking()
+            .FirstOrDefaultAsync(a => a.Id == id);
+
+        if (aluno is null)
+            return NotFound();
+
+        var result = new AlunoComTreinoDto
+        {
+            Id = aluno.Id,
+            Nome = aluno.Nome,
+            Cpf = aluno.Cpf,
+            Email = aluno.Email,
+            Nascimento = aluno.Nascimento,
+            Treinos = aluno.Treinos.Select(t => new TreinoDto
             {
-                Id = aluno.Id,
-                Nome = aluno.Nome,
-                Email = aluno.Email,
-                Telefone = aluno.Telefone,
-                DataNascimento = aluno.DataNascimento,
-                PlanoId = aluno.PlanoId,
-                PlanoNome = aluno.Plano?.Nome
-            });
-        }
+                Id = t.Id,
+                NomeTreino = t.NomeTreino,
+                NomeExercicio = t.Exercicio?.Nome,
+                Series = t.Series,
+                Repeticoes = t.Repeticoes
+            }).ToList()
+        };
 
-        // Cadastro é público — o aluno precisa se registrar antes de logar
-        [AllowAnonymous]
-        [HttpPost]
-        public async Task<IActionResult> Create([FromBody] AlunoCreateDto dto)
-        {
-            var emailExistente = await _context.Alunos.AnyAsync(a => a.Email == dto.Email);
-            if (emailExistente)
-                return BadRequest(new { message = "Email já cadastrado" });
-
-            var planoExiste = await _context.Planos.AnyAsync(p => p.Id == dto.PlanoId);
-            if (!planoExiste)
-                return BadRequest(new { message = "Plano não encontrado" });
-
-            var aluno = new Aluno
-            {
-                Nome = dto.Nome,
-                Email = dto.Email,
-                Senha = BCrypt.Net.BCrypt.HashPassword(dto.Senha),
-                Telefone = dto.Telefone,
-                DataNascimento = dto.DataNascimento,
-                PlanoId = dto.PlanoId
-            };
-
-            _context.Alunos.Add(aluno);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetById), new { id = aluno.Id }, new AlunoResponseDto
-            {
-                Id = aluno.Id,
-                Nome = aluno.Nome,
-                Email = aluno.Email,
-                Telefone = aluno.Telefone,
-                DataNascimento = aluno.DataNascimento,
-                PlanoId = aluno.PlanoId
-            });
-        }
-
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] AlunoUpdateDto dto)
-        {
-            var aluno = await _context.Alunos.FindAsync(id);
-
-            if (aluno == null)
-                return NotFound(new { message = "Aluno não encontrado" });
-
-            var planoExiste = await _context.Planos.AnyAsync(p => p.Id == dto.PlanoId);
-            if (!planoExiste)
-                return BadRequest(new { message = "Plano não encontrado" });
-
-            aluno.Nome = dto.Nome;
-            aluno.Telefone = dto.Telefone;
-            aluno.PlanoId = dto.PlanoId;
-
-            await _context.SaveChangesAsync();
-            return NoContent();
-        }
-
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
-        {
-            var aluno = await _context.Alunos.FindAsync(id);
-
-            if (aluno == null)
-                return NotFound(new { message = "Aluno não encontrado" });
-
-            _context.Alunos.Remove(aluno);
-            await _context.SaveChangesAsync();
-            return NoContent();
-        }
+        return Ok(result);
     }
 }

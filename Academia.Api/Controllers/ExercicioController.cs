@@ -20,96 +20,89 @@ namespace Academia.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAllAsync()
         {
             var exercicios = await _context.Exercicios
                 .Select(e => new ExercicioResponseDto
                 {
                     Id = e.Id,
                     Nome = e.Nome,
-                    Descricao = e.Descricao,
                     GrupoMuscular = e.GrupoMuscular,
-                    Series = e.Series,
-                    Repeticoes = e.Repeticoes
                 })
                 .ToListAsync();
 
             return Ok(exercicios);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetExercicioById")]
         public async Task<IActionResult> GetById(int id)
         {
-            var exercicio = await _context.Exercicios.FindAsync(id);
+            var exercicio = await _context.Exercicios.AsNoTracking().FirstOrDefaultAsync(c => c.Id == id);
 
-            if (exercicio == null)
-                return NotFound(new { message = "Exercício não encontrado" });
+            if (exercicio is null)
+                return NotFound("Exercício não encontrado");
 
             return Ok(new ExercicioResponseDto
             {
                 Id = exercicio.Id,
                 Nome = exercicio.Nome,
-                Descricao = exercicio.Descricao,
                 GrupoMuscular = exercicio.GrupoMuscular,
-                Series = exercicio.Series,
-                Repeticoes = exercicio.Repeticoes
             });
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] ExercicioCreateDto dto)
+        public async Task<IActionResult> Create(ExercicioCreateDto dto)
         {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
             var exercicio = new Exercicio
             {
                 Nome = dto.Nome,
-                Descricao = dto.Descricao,
                 GrupoMuscular = dto.GrupoMuscular,
-                Series = dto.Series,
-                Repeticoes = dto.Repeticoes
             };
 
             _context.Exercicios.Add(exercicio);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetById), new { id = exercicio.Id }, new ExercicioResponseDto
+
+
+            var result = new ExercicioDto
             {
                 Id = exercicio.Id,
                 Nome = exercicio.Nome,
-                Descricao = exercicio.Descricao,
                 GrupoMuscular = exercicio.GrupoMuscular,
-                Series = exercicio.Series,
-                Repeticoes = exercicio.Repeticoes
-            });
+            };
+
+            return CreatedAtRoute("GetExercicioById", new { id = exercicio.Id }, result);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] ExercicioCreateDto dto)
+        public async Task<IActionResult> UpdateAsync(int id, ExercicioUpdateDto dto)
         {
             var exercicio = await _context.Exercicios.FindAsync(id);
 
-            if (exercicio == null)
-                return NotFound(new { message = "Exercício não encontrado" });
+            if (exercicio is null)
+                return NotFound("Exercício não encontrado");
 
             exercicio.Nome = dto.Nome;
-            exercicio.Descricao = dto.Descricao;
             exercicio.GrupoMuscular = dto.GrupoMuscular;
-            exercicio.Series = dto.Series;
-            exercicio.Repeticoes = dto.Repeticoes;
 
             await _context.SaveChangesAsync();
+
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> DeleteAsync(int id)
         {
             var exercicio = await _context.Exercicios.FindAsync(id);
 
-            if (exercicio == null)
-                return NotFound(new { message = "Exercício não encontrado" });
+            if (exercicio is null)
+                return NotFound("Exercício não encontrado");
 
             _context.Exercicios.Remove(exercicio);
             await _context.SaveChangesAsync();
+            
             return NoContent();
         }
     }

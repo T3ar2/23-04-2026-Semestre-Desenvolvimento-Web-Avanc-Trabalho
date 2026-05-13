@@ -1,7 +1,7 @@
 
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
-using Academia.Api.Dtos;
+using Academia.Api.DTOs;
 
 using System.Security.Claims;
 using System.Text;
