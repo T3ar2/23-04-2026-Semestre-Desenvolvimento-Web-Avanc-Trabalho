@@ -20,6 +20,7 @@ namespace Academia.Api.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin,Professor,Aluno")]
         public async Task<IActionResult> GetAllAsync()
         {
             var exercicios = await _context.Exercicios
@@ -35,6 +36,7 @@ namespace Academia.Api.Controllers
         }
 
         [HttpGet("{id}", Name = "GetExercicioById")]
+        [Authorize(Roles = "Admin,Professor,Aluno")]
         public async Task<IActionResult> GetById(int id)
         {
             var exercicio = await _context.Exercicios.AsNoTracking().FirstOrDefaultAsync(c => c.Id == id);
@@ -51,7 +53,7 @@ namespace Academia.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(ExercicioCreateDto dto)
+        [Authorize(Roles = "Admin,Professor")]        public async Task<IActionResult> Create(ExercicioCreateDto dto)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
@@ -77,6 +79,7 @@ namespace Academia.Api.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin,Professor")]
         public async Task<IActionResult> UpdateAsync(int id, ExercicioUpdateDto dto)
         {
             var exercicio = await _context.Exercicios.FindAsync(id);
@@ -93,6 +96,7 @@ namespace Academia.Api.Controllers
         }
 
         [HttpDelete("{id:int}")]
+        [Authorize(Roles = "Admin,Professor")]
         public async Task<IActionResult> DeleteAsync(int id)
         {
             var exercicio = await _context.Exercicios.FindAsync(id);

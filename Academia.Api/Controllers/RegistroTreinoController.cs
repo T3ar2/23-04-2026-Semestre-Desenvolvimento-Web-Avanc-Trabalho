@@ -19,6 +19,7 @@ public class RegistroTreinoController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Roles = "Admin,Professor,Aluno")]
     public async Task<IActionResult> CreateAsync(RegistroTreinoCreateDto dto)
     {
         if (!ModelState.IsValid)
@@ -51,7 +52,7 @@ public class RegistroTreinoController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<RegistroTreinoResponseDto>>> GetAllAsync()
+    [Authorize(Roles = "Admin,Professor")]    public async Task<ActionResult<IEnumerable<RegistroTreinoResponseDto>>> GetAllAsync()
     {
         var registros = await ctx.RegistrosTreino
             .Include(r => r.ExerciciosRealizados)
@@ -79,6 +80,7 @@ public class RegistroTreinoController : ControllerBase
     }
 
     [HttpGet("{id:int}", Name = "GetRegistroTreinoById")]
+    [Authorize(Roles = "Admin,Professor,Aluno")]
     public async Task<ActionResult<RegistroTreinoResponseDto>> GetByIdAsync(int id)
     {
         var registro = await ctx.RegistrosTreino
@@ -116,6 +118,7 @@ public class RegistroTreinoController : ControllerBase
     }
 
     [HttpPut("{id:int}")]
+    [Authorize(Roles = "Admin,Professor,Aluno")]
     public async Task<IActionResult> UpdateAsync(int id, RegistroTreinoUpdateDto dto)
     {
         if (!ModelState.IsValid)
@@ -157,6 +160,7 @@ public class RegistroTreinoController : ControllerBase
     }
 
     [HttpDelete("{id:int}")]
+    [Authorize(Roles = "Admin,Professor")]
     public async Task<IActionResult> DeleteAsync(int id)
     {
         var registro = await ctx.RegistrosTreino.FindAsync(id);

@@ -20,6 +20,7 @@ public class AlunoController : ControllerBase
     }
 
     [HttpGet]
+    [Authorize(Roles = "Admin,Professor")]
     public async Task<ActionResult<IEnumerable<AlunoDto>>> GetAllAsync()
     {
         var alunos = await ctx.Alunos
@@ -39,6 +40,7 @@ public class AlunoController : ControllerBase
     }
 
     [HttpGet("{id:int}", Name = "GetAlunoById")]
+    [Authorize(Roles = "Admin,Professor,Aluno")]
     public async Task<ActionResult<AlunoDto>> GetByIdAsync(int id)
     {
         var aluno = await ctx.Alunos
@@ -61,6 +63,7 @@ public class AlunoController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Roles = "Admin,Professor")]
     public async Task<ActionResult<AlunoDto>> CreateAsync(AlunoCreateDto dto)
     {
         if (!ModelState.IsValid)
@@ -89,6 +92,7 @@ public class AlunoController : ControllerBase
     }
 
     [HttpPut("{id:int}")]
+    [Authorize(Roles = "Admin,Professor,Aluno")]
     public async Task<IActionResult> UpdateAsync(int id, AlunoUpdateDto dto)
     {
         if (!ModelState.IsValid)
@@ -110,6 +114,7 @@ public class AlunoController : ControllerBase
     }
 
     [HttpDelete("{id:int}")]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> DeleteAsync(int id)
     {
         var aluno = await ctx.Alunos.FindAsync(id);
@@ -123,35 +128,5 @@ public class AlunoController : ControllerBase
         return NoContent();
     }
 
-    [HttpGet("{id:int}/treino")]
-    public async Task<ActionResult<AlunoComTreinoDto>> GetAlunoComTreinoAsync(int id)
-    {
-        var aluno = await ctx.Alunos
-            .Include(a => a.PlanosTreinos)
-            .ThenInclude(t => t.ExerciciosPlanejados)
-            .AsNoTracking()
-            .FirstOrDefaultAsync(a => a.Id == id);
-
-        if (aluno is null)
-            return NotFound();
-
-        var result = new AlunoComTreinoDto
-        {
-            Id = aluno.Id,
-            Nome = aluno.Nome,
-            Cpf = aluno.Cpf,
-            Email = aluno.Email,
-            Nascimento = aluno.Nascimento,
-            PlanosTreinos = aluno.PlanosTreinos.Select(t => new PlanoTreino
-            {
-                Id = t.Id,
-                NomeTreino = t.NomeTreino,
-                AlunoId = t.AlunoId,
-                Aluno = t.Aluno,
-                ExerciciosPlanejados = t.ExerciciosPlanejados
-            }).ToList()
-        };
-
-        return Ok(result);
-    }
+    
 }

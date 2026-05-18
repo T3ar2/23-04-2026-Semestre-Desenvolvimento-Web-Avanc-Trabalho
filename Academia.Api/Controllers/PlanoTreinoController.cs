@@ -20,6 +20,7 @@ public class PlanoTreinoController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Roles = "Admin,Professor")]
     public async Task<IActionResult> CreateAsync(PlanoTreinoCreateDto dto)
     {
         if (!ModelState.IsValid)
@@ -51,7 +52,8 @@ public class PlanoTreinoController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<PlanoTreinoDto>>> GetAllAsync()
+    [Authorize(Roles = "Admin,Professor")]
+        public async Task<ActionResult<IEnumerable<PlanoTreinoDto>>> GetAllAsync()
     {
         var treinos = await ctx.PlanosTreino
             .Include(t => t.ExerciciosPlanejados!)
@@ -77,6 +79,7 @@ public class PlanoTreinoController : ControllerBase
     }
 
     [HttpGet("{id:int}", Name = "GetPlanoTreinoById")]
+    [Authorize(Roles = "Admin,Professor,Aluno")]
     public async Task<ActionResult<PlanoTreinoDto>> GetByIdAsync(int id)
     {
         var planoTreino = await ctx.PlanosTreino
@@ -112,6 +115,7 @@ public class PlanoTreinoController : ControllerBase
     }
 
     [HttpPut("{id:int}")]
+    [Authorize(Roles = "Admin,Professor")]
     public async Task<IActionResult> UpdateAsync(int id, PlanoTreinoUpdateDto dto)
     {
         if (!ModelState.IsValid)
@@ -151,6 +155,7 @@ public class PlanoTreinoController : ControllerBase
     }
 
     [HttpDelete("{id:int}")]
+    [Authorize(Roles = "Admin,Professor")]
     public async Task<IActionResult> DeleteAsync(int id)
     {
         var planoTreino = await ctx.PlanosTreino.FindAsync(id);
