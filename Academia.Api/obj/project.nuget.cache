@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "yvx6ygFik14=",
+  "dgSpecHash": "+MoNm2JSd1Q=",
   "success": true,
   "projectFilePath": "C:\\Users\\Nicollas\\Desktop\\Trabalho Dev Web Avanc\\23-04-2026-Semestre-Desenvolvimento-Web-Avanc-Trabalho\\Academia.Api\\Academia.Api.csproj",
   "expectedPackageFiles": [
@@ -59,7 +59,11 @@
     "C:\\Users\\Nicollas\\.nuget\\packages\\system.text.encoding.codepages\\6.0.0\\system.text.encoding.codepages.6.0.0.nupkg.sha512",
     "C:\\Users\\Nicollas\\.nuget\\packages\\system.text.encodings.web\\8.0.0\\system.text.encodings.web.8.0.0.nupkg.sha512",
     "C:\\Users\\Nicollas\\.nuget\\packages\\system.text.json\\8.0.0\\system.text.json.8.0.0.nupkg.sha512",
-    "C:\\Users\\Nicollas\\.nuget\\packages\\system.threading.channels\\6.0.0\\system.threading.channels.6.0.0.nupkg.sha512"
+    "C:\\Users\\Nicollas\\.nuget\\packages\\system.threading.channels\\6.0.0\\system.threading.channels.6.0.0.nupkg.sha512",
+    "C:\\Users\\Nicollas\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.26\\microsoft.netcore.app.ref.8.0.26.nupkg.sha512",
+    "C:\\Users\\Nicollas\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.26\\microsoft.windowsdesktop.app.ref.8.0.26.nupkg.sha512",
+    "C:\\Users\\Nicollas\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.26\\microsoft.aspnetcore.app.ref.8.0.26.nupkg.sha512",
+    "C:\\Users\\Nicollas\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\8.0.26\\microsoft.netcore.app.host.win-x64.8.0.26.nupkg.sha512"
   ],
   "logs": []
 }
