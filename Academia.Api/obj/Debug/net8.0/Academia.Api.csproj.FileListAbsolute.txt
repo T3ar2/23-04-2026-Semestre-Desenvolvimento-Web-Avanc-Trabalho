@@ -236,3 +236,4 @@ C:\Users\Nicollas\Desktop\Trabalho Dev Web Avanc\23-04-2026-Semestre-Desenvolvim
 C:\Users\Nicollas\Desktop\Trabalho Dev Web Avanc\23-04-2026-Semestre-Desenvolvimento-Web-Avanc-Trabalho\Academia.Api\obj\Debug\net8.0\Academia.Api.genruntimeconfig.cache
 C:\Users\Nicollas\Desktop\Trabalho Dev Web Avanc\23-04-2026-Semestre-Desenvolvimento-Web-Avanc-Trabalho\Academia.Api\obj\Debug\net8.0\ref\Academia.Api.dll
 C:\Users\nicol\OneDrive\Área de Trabalho\Trabalho de Web 2026\23-04-2026-Semestre-Desenvolvimento-Web-Avanc-Trabalho\Academia.Api\bin\Debug\net8.0\package-lock.json
+C:\Users\nicol\OneDrive\Área de Trabalho\Trabalho de Web 2026\23-04-2026-Semestre-Desenvolvimento-Web-Avanc-Trabalho\Academia.Api\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
