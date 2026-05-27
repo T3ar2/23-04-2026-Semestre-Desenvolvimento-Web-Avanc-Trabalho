@@ -3,3 +3,10 @@ export type LoginResponse = {
     nome: string;
     usuario: string;
 }
+export type AlunoDto = {
+    id: number;
+    nome: string;
+    cpf: string;
+    email: string;
+    dataNascimento: Date;
+}
