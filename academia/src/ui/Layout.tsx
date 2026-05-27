@@ -17,6 +17,8 @@ export function Layout() {
         <nav className="app-nav">
           <Link to="/">Home</Link>
 
+          {auth && <Link to="/aluno">Aluno</Link>}
+
           {!auth && <Link to="/login">Login</Link>}
 
         </nav>
