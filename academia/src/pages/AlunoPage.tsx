@@ -10,7 +10,7 @@ export function AlunoPage() {
   const [nome, setNome] = useState("");
   const [cpf, setCpf] = useState("");
   const [email, setEmail] = useState("");
-  const [dataNascimento, setDataNascimento] = useState(Date);
+  const [nascimento, setnascimento] = useState(Date);
 
   const sortedAluno = useMemo(
     () => [...aluno].sort((a, b) => a.nome.localeCompare(b.nome)),
@@ -43,7 +43,7 @@ export function AlunoPage() {
     setNome("");
     setCpf("");
     setEmail("");
-    setDataNascimento(Date);
+    setnascimento(Date);
   }
 
   async function handleSubmit(e: React.FormEvent) {
@@ -55,7 +55,7 @@ export function AlunoPage() {
         nome,
         cpf,
         email,
-        dataNascimento: new Date(dataNascimento),
+        nascimento: new Date(nascimento),
       };
 
       if (editing) {
@@ -117,12 +117,12 @@ export function AlunoPage() {
         </div>
 
         <div className="form-group">
-          <label htmlFor="dataNascimento">Data de Nascimento</label>
+          <label htmlFor="nascimento">Data de Nascimento</label>
           <input
-            id="dataNascimento"
+            id="nascimento"
             type="date"
-            value={dataNascimento}
-            onChange={(e) => setDataNascimento(e.target.value)}
+            value={nascimento}
+            onChange={(e) => setnascimento(e.target.value)}
           />
         </div>
 
@@ -154,7 +154,7 @@ export function AlunoPage() {
                 email: {p.email}
               </div>
               <div className="muted">
-                data de nascimento: {p.dataNascimento.toLocaleDateString()}
+                data de nascimento: {p.nascimento ? new Date(p.nascimento).toLocaleDateString() : 'N/A'}
               </div>
             </div>
 
@@ -167,7 +167,7 @@ export function AlunoPage() {
                   setNome(p.nome);
                   setCpf(p.cpf);
                   setEmail(p.email);
-                  setDataNascimento(p.dataNascimento.toISOString().split("T")[0]);
+                  setnascimento(p.nascimento.toISOString().split("T")[0]);
                 }}
               >
                 Editar

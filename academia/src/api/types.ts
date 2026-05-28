@@ -8,5 +8,5 @@ export type AlunoDto = {
     nome: string;
     cpf: string;
     email: string;
-    dataNascimento: Date;
+    nascimento: Date;
 }

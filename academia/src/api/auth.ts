@@ -14,7 +14,6 @@ export function logout() {
   localStorage.removeItem('token');
   localStorage.removeItem('nome');
   localStorage.removeItem('usuario');
-  localStorage.removeItem('roles');
 }
 
 export function isAuthenticated() {

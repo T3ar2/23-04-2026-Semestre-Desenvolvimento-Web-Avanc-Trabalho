@@ -8,16 +8,16 @@ export async function listarAlunos() {
 }
 
 export async function listarAlunoPorId(id: number) {
-  const { data } = await http.get<{ id: number }>(`/api/Aluno/${id}`);
+  const { data } = await http.get<AlunoDto>(`/api/Aluno/${id}`);
   return data;
 }
 
-export async function criarAluno(payload: { nome: string; cpf: string; email: string, dataNascimento: Date }) {
-  const { data } = await http.post<{ id: number }>('/api/Aluno', payload);
+export async function criarAluno(payload: Omit<AlunoDto, 'id'>) {
+  const { data } = await http.post<AlunoDto>('/api/Aluno', payload);
   return data;
 }
 
-export async function atualizarAluno(id: number, payload: { nome: string; cpf: string; email: string, dataNascimento: Date }) {
+export async function atualizarAluno(id: number, payload: Omit<AlunoDto, 'id'>) {
   await http.put(`/api/Aluno/${id}`, payload);
 }
 
