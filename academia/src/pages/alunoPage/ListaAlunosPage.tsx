@@ -79,7 +79,7 @@ export function ListaAlunosPage() {
           {sortedAluno.map((p) => (
             <div key={p.id} className="grid-row list-item">
               
-              <div className="muted">#{p.id}</div>
+              <div className="muted">{p.id}</div>
               
               <div><strong>{p.nome}</strong></div>
               
