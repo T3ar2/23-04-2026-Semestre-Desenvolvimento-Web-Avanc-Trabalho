@@ -1,0 +1,83 @@
+/* =========================================
+   Layout Principal da Aplicação
+========================================= */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ocupa 100% da altura da tela */
+  background-color: #f8fafc; /* Fundo cinza bem claro para o app inteiro */
+}
+
+/* =========================================
+   Cabeçalho (Header)
+========================================= */
+.app-header {
+  display: flex;
+  justify-content: space-between; /* Espalha: Logo (esq) - Nav (meio) - User (dir) */
+  align-items: center; /* Alinha tudo verticalmente no centro */
+  height: 64px;
+  padding: 0 32px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04); /* Sombra bem suave */
+}
+
+/* Marca / Logo */
+.app-brand {
+  font-size: 20px;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: -0.5px;
+}
+
+/* =========================================
+   Navegação (Links)
+========================================= */
+.app-nav {
+  display: flex;
+  gap: 24px; /* Espaço entre os links */
+  flex: 1;
+  margin-left: 48px; /* Afasta a navegação da logo */
+}
+
+.app-nav a {
+  text-decoration: none;
+  color: #64748b;
+  font-size: 15px;
+  font-weight: 500;
+  transition: color 0.2s ease;
+  padding: 8px 0;
+}
+
+.app-nav a:hover {
+  color: #0ea5e9; /* Fica azul ao passar o mouse */
+}
+
+/* =========================================
+   Área do Usuário (Direita)
+========================================= */
+.app-user {
+  display: flex;
+  align-items: center;
+  gap: 16px; /* Espaço entre o nome e o botão de sair */
+}
+
+.app-user-name {
+  font-size: 14px;
+  color: #475569;
+  font-weight: 500;
+}
+
+/* Ajuste no botão de sair para caber melhor no header */
+.app-user .btn-danger {
+  padding: 6px 12px;
+  font-size: 13px;
+}
+
+/* =========================================
+   Área Principal de Conteúdo
+========================================= */
+main {
+  flex: 1; /* Faz o main preencher todo o espaço restante abaixo do header */
+  padding: 32px 0; /* Dá um respiro antes de começar o conteúdo da página */
+}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { isAuthenticated, logout } from '../api/auth';
+import '../cssDeTeste/HeaderLayout.css';
 
 export function Layout() {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ export function Layout() {
         <nav className="app-nav">
           <Link to="/">Home</Link>
 
-          {auth && <Link to="/aluno">Aluno</Link>}
+          {auth && <Link to="/lista-alunos">Lista de Alunos</Link>}
 
           {!auth && <Link to="/login">Login</Link>}
 
