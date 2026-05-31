@@ -1,10 +1,8 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { AlunoDto } from "../../api/types";
 import {
-  atualizarAluno,
   criarAluno,
   listarAlunos,
-  removerAluno,
 } from "../../api/aluno";
 import "../../cssDeTeste/AlunoPage.css";
 import { useNavigate } from "react-router-dom";

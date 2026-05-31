@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-// Removi o listarAlunos e adicionei o listarAlunoPorId
 import { atualizarAluno, listarAlunoPorId } from "../../api/aluno";
 import "../../cssDeTeste/AlunoPage.css";
 import { useNavigate, useParams } from "react-router-dom";

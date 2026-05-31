@@ -58,7 +58,7 @@ export function AdicionarExercicioPage() {
     
       resetForm();
       await refresh();
-      navigate("/lista-alunos");
+      navigate("/lista-exercicios");
     } catch (err: any) {
       setError(
         err?.response?.data?.message ??

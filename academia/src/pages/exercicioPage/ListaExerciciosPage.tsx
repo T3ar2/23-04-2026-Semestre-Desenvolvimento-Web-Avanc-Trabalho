@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { ExercicioDto } from "../../api/types";
-import "../../cssDeTeste/ListaAlunos.css";
+import "../../cssDeTeste/ListaExercicio.css";
 import { useNavigate } from "react-router-dom";
 import { listarExercicios, removerExercicio } from "../../api/exercicio";
 
@@ -8,9 +8,6 @@ export function ListaExerciciosPage() {
   const [exercicios, setExercicios] = useState<ExercicioDto[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-  const [editing, setEditing] = useState<ExercicioDto | null>(null);
-  const [nome, setNome] = useState("");
-  const [grupoMuscular, setGrupoMuscular] = useState("");
   const navigate = useNavigate();
 
   const sortedExercicio = useMemo(
