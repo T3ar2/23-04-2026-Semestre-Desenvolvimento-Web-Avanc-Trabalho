@@ -19,6 +19,7 @@ export function Layout() {
           <Link to="/">Home</Link>
 
           {auth && <Link to="/lista-alunos">Lista de Alunos</Link>}
+          {auth && <Link to="/lista-exercicios">Lista de Exercícios</Link>}
 
           {!auth && <Link to="/login">Login</Link>}
 

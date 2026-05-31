@@ -7,6 +7,9 @@ import { RequireAuth } from "./routes/RequireAuth";
 import { AdicionarAlunoPage } from "./pages/alunoPage/AdicionarAlunoPage";
 import { ListaAlunosPage } from "./pages/alunoPage/ListaAlunosPage";
 import { AtualizarAlunoPage } from "./pages/alunoPage/AtualizarAlunoPage";
+import { AdicionarExercicioPage } from "./pages/exercicioPage/AdicionarExercicioPage";
+import { AtualizarExercicioPage } from "./pages/exercicioPage/AtualizarExercicioPage";
+import { ListaExerciciosPage } from "./pages/exercicioPage/ListaExerciciosPage";
 
 function App() {
   return (
@@ -22,7 +25,6 @@ function App() {
             </RequireAuth>
           }
         />
-
         <Route path="/lista-alunos" element={
             <RequireAuth>
               <ListaAlunosPage />
@@ -32,6 +34,26 @@ function App() {
            <Route path="/atualizar-aluno/:id" element={
             <RequireAuth>
               <AtualizarAlunoPage />
+            </RequireAuth>
+          }/>
+
+          <Route
+          path="/adiciona-exercicio"
+          element={
+            <RequireAuth>
+              <AdicionarExercicioPage />
+            </RequireAuth>
+          }
+        />
+        <Route path="/lista-exercicios" element={
+            <RequireAuth>
+              <ListaExerciciosPage />
+            </RequireAuth>
+          }/>
+
+           <Route path="/atualizar-exercicio/:id" element={
+            <RequireAuth>
+              <AtualizarExercicioPage />
             </RequireAuth>
           }/>
 

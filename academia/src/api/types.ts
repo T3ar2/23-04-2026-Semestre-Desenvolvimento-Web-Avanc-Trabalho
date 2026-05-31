@@ -11,3 +11,9 @@ export type AlunoDto = {
     email: string;
     nascimento: Date;
 }
+
+export type ExercicioDto = {
+    id: number;
+    nome: string;
+    grupoMuscular: string;
+}
