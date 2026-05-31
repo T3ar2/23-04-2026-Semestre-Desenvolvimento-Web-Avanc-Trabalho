@@ -55,7 +55,7 @@ export function ListaExerciciosPage() {
           <div>Código do Exercício</div>
           <div>Nome</div>
           <div>Grupo Muscular</div>
-          <div>Email</div>
+          <div>Botões de Ações</div>
         </div>
 
         <div className="table-body">
