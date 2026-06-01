@@ -4,7 +4,7 @@ import { listarPlanosTreino, removerPlanoTreino } from "../api/planoTreino";
 import { listarAlunos } from "../api/aluno";
 import { PlanoTreinoDto, AlunoDto } from "../api/types";
 
-export function PlanoTreinoListPage() {
+export function ListaPlanosTreinoPage() {
   const navigate = useNavigate();
   const [planos, setPlanos] = useState<PlanoTreinoDto[]>([]);
   const [alunos, setAlunos] = useState<AlunoDto[]>([]);

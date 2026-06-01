@@ -5,7 +5,7 @@ import { listarAlunos } from "../api/aluno";
 import { listarExercicios } from "../api/exercicio";
 import { AlunoDto } from "../api/types";
 
-export function PlanoTreinoUpdatePage() {
+export function AtualizarPlanoTreinoPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   

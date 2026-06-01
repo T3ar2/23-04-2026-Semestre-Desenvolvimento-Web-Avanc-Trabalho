@@ -20,6 +20,7 @@ export type ExercicioDto = {
 
 
 // planos de treino
+
 export type ExercicioPlanejadoCreateDto = {
   exercicioId: number;
   series: number;
@@ -46,8 +47,20 @@ export type PlanoTreinoDto = {
   exerciciosPlanejados: ExercicioPlanejadoResponseDto[];
 }
 
+export type ExercicioPlanejadoUpdateDto = {
+  exercicioId: number;
+  series: number;
+  repeticoes: number;
+}
+
+export type PlanoTreinoUpdateDto = {
+  nomeTreino: string;
+  alunoId: number;
+  exerciciosPlanejados: ExercicioPlanejadoUpdateDto[];
+}
 
 // registro de treino
+
 export type ExercicioRealizadoCreateDto = {
   exercicioId: number;
   series: number;
@@ -76,4 +89,18 @@ export type RegistroTreinoResponseDto = {
   planoTreinoId?: number | null;
   dataExecucao: string;
   exerciciosRealizados: ExercicioRealizadoResponseDto[];
+}
+
+export type ExercicioRealizadoUpdateDto = {
+  exercicioId: number;
+  series: number;
+  repeticoes: number;
+  carga: number;
+}
+
+export type RegistroTreinoUpdateDto = {
+  alunoId: number;
+  planoTreinoId?: number | null;
+  dataExecucao: string;
+  exerciciosRealizados: ExercicioRealizadoUpdateDto[];
 }

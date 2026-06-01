@@ -5,7 +5,7 @@ import { listarAlunos } from "../api/aluno";
 import { listarExercicios } from "../api/exercicio";
 import { AlunoDto } from "../api/types";
 
-export function PlanoTreinoCreatePage() {
+export function AdicionarPlanoTreinoPage() {
   const navigate = useNavigate();
   const [alunos, setAlunos] = useState<AlunoDto[]>([]);
   const [exercicios, setExercicios] = useState<any[]>([]);

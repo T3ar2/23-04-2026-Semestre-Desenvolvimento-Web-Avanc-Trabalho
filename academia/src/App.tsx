@@ -11,11 +11,13 @@ import { AdicionarExercicioPage } from "./pages/exercicioPage/AdicionarExercicio
 import { AtualizarExercicioPage } from "./pages/exercicioPage/AtualizarExercicioPage";
 import { ListaExerciciosPage } from "./pages/exercicioPage/ListaExerciciosPage";
 
-import { AdicionarPlanoTreinoPage } from './pages/planosTreinoPage/AdicionarPlanoTreinoPage';
+import { ListaPlanosTreinoPage } from "./pages/planosTreinoPage/ListaPlanoTreinoPage";
+import { AdicionarPlanoTreinoPage } from "./pages/planosTreinoPage/AdicionarPlanoTreinoPage";
+import { AtualizarPlanoTreinoPage } from "./pages/planosTreinoPage/AtualizarPlanoTreinoPage";
 
-import { ListaRegistrosTreinoPage } from './pages/registroTreinoPage/ListaRegistrosTreinoPage';
-import { AdicionarRegistroTreinoPage } from './pages/registroTreinoPage/AdicionarRegistroTreinoPage';
-import { AtualizarRegistroTreinoPage } from './pages/registroTreinoPage/AtualizarRegistroTreinoPage';
+import { ListaRegistrosTreinoPage } from "./pages/registroTreinoPage/ListaRegistroTreinoPage";
+import { AdicionarRegistroTreinoPage } from "./pages/registroTreinoPage/AdicionarRegistroTreinoPage";
+import { AtualizarRegistroTreinoPage } from "./pages/registroTreinoPage/AtualizarRegistroTreinoPage";
 
 function App() {
   return (
@@ -31,17 +33,23 @@ function App() {
             </RequireAuth>
           }
         />
-        <Route path="/lista-alunos" element={
-          <RequireAuth>
-            <ListaAlunosPage />
-          </RequireAuth>
-        } />
+        <Route
+          path="/lista-alunos"
+          element={
+            <RequireAuth>
+              <ListaAlunosPage />
+            </RequireAuth>
+          }
+        />
 
-        <Route path="/atualizar-aluno/:id" element={
-          <RequireAuth>
-            <AtualizarAlunoPage />
-          </RequireAuth>
-        } />
+        <Route
+          path="/atualizar-aluno/:id"
+          element={
+            <RequireAuth>
+              <AtualizarAlunoPage />
+            </RequireAuth>
+          }
+        />
 
         <Route
           path="/adiciona-exercicio"
@@ -51,42 +59,75 @@ function App() {
             </RequireAuth>
           }
         />
-        <Route path="/lista-exercicios" element={
-          <RequireAuth>
-            <ListaExerciciosPage />
-          </RequireAuth>
-        } />
+        <Route
+          path="/lista-exercicios"
+          element={
+            <RequireAuth>
+              <ListaExerciciosPage />
+            </RequireAuth>
+          }
+        />
 
-        <Route path="/atualizar-exercicio/:id" element={
-          <RequireAuth>
-            <AtualizarExercicioPage />
-          </RequireAuth>
-        } />
+        <Route
+          path="/atualizar-exercicio/:id"
+          element={
+            <RequireAuth>
+              <AtualizarExercicioPage />
+            </RequireAuth>
+          }
+        />
 
         <Route path="*" element={<Navigate to="/" replace />} />
 
-        <Route path="/plano-treino" element={
-          <RequireAuth>
-            <PlanoTreinoPage />
-          </RequireAuth>
-        }
+        <Route
+          path="/plano-treino"
+          element={
+            <RequireAuth>
+              <ListaPlanosTreinoPage />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/plano-treino/novo"
+          element={
+            <RequireAuth>
+              <AdicionarPlanoTreinoPage />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/plano-treino/editar/:id"
+          element={
+            <RequireAuth>
+              <AtualizarPlanoTreinoPage />
+            </RequireAuth>
+          }
         />
 
-        <Route path="/registro-treino" element={
-          <RequireAuth>
-            <ListaRegistrosTreinoPage />
-          </RequireAuth>
-        } />
-        <Route path="/registro-treino/novo" element={
-          <RequireAuth>
-            <AdicionarRegistroTreinoPage />
-          </RequireAuth>
-        } />
-        <Route path="/registro-treino/editar/:id" element={
-          <RequireAuth>
-            <AtualizarRegistroTreinoPage />
-          </RequireAuth>
-        } />
+        <Route
+          path="/registro-treino"
+          element={
+            <RequireAuth>
+              <ListaRegistrosTreinoPage />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/registro-treino/novo"
+          element={
+            <RequireAuth>
+              <AdicionarRegistroTreinoPage />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/registro-treino/editar/:id"
+          element={
+            <RequireAuth>
+              <AtualizarRegistroTreinoPage />
+            </RequireAuth>
+          }
+        />
       </Route>
     </Routes>
   );

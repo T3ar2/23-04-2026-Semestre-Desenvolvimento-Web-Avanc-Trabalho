@@ -3085,19 +3085,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Erick\\.nuget\\packages\\": {}
+    "C:\\Users\\erick\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Erick\\Desktop\\programaçao\\gymfrontend\\23-04-2026-Semestre-Desenvolvimento-Web-Avanc-Trabalho\\Academia.Api\\Academia.Api.csproj",
+      "projectUniqueName": "C:\\Users\\erick\\OneDrive\\Área de Trabalho\\erick - pessoal\\gymfront\\23-04-2026-Semestre-Desenvolvimento-Web-Avanc-Trabalho\\Academia.Api\\Academia.Api.csproj",
       "projectName": "Academia.Api",
-      "projectPath": "C:\\Users\\Erick\\Desktop\\programaçao\\gymfrontend\\23-04-2026-Semestre-Desenvolvimento-Web-Avanc-Trabalho\\Academia.Api\\Academia.Api.csproj",
-      "packagesPath": "C:\\Users\\Erick\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Erick\\Desktop\\programaçao\\gymfrontend\\23-04-2026-Semestre-Desenvolvimento-Web-Avanc-Trabalho\\Academia.Api\\obj\\",
+      "projectPath": "C:\\Users\\erick\\OneDrive\\Área de Trabalho\\erick - pessoal\\gymfront\\23-04-2026-Semestre-Desenvolvimento-Web-Avanc-Trabalho\\Academia.Api\\Academia.Api.csproj",
+      "packagesPath": "C:\\Users\\erick\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\erick\\OneDrive\\Área de Trabalho\\erick - pessoal\\gymfront\\23-04-2026-Semestre-Desenvolvimento-Web-Avanc-Trabalho\\Academia.Api\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Erick\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\erick\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -3115,6 +3115,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -3175,7 +3180,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.121/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.413/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
