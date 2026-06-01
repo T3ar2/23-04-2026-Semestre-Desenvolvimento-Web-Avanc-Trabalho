@@ -21,6 +21,9 @@ export function Layout() {
           {auth && <Link to="/lista-alunos">Lista de Alunos</Link>}
           {auth && <Link to="/lista-exercicios">Lista de Exercícios</Link>}
 
+          {auth && <Link to="/plano-treino">Planos de Treino</Link>}
+          {auth && <Link to="/registro-treino">Registros de Treino</Link>}
+
           {!auth && <Link to="/login">Login</Link>}
 
         </nav>
