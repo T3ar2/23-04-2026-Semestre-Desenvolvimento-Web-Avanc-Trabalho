@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { criarPlanoTreino } from "../api/planoTreino";
-import { listarAlunos } from "../api/aluno";
-import { listarExercicios } from "../api/exercicio";
-import { AlunoDto } from "../api/types";
+import { criarPlanoTreino } from "../../api/planoTreino";
+import { listarAlunos } from "../../api/aluno";
+import { listarExercicios } from "../../api/exercicio";
+import { AlunoDto } from "../../api/types";
 
 export function AdicionarPlanoTreinoPage() {
   const navigate = useNavigate();

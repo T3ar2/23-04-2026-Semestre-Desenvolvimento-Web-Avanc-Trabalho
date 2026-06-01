@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { listarPlanosTreino, removerPlanoTreino } from "../api/planoTreino";
-import { listarAlunos } from "../api/aluno";
-import { PlanoTreinoDto, AlunoDto } from "../api/types";
+import { listarPlanosTreino, removerPlanoTreino } from "../../api/planoTreino";
+import { listarAlunos } from "../../api/aluno";
+import { PlanoTreinoDto, AlunoDto } from "../../api/types";
 
 export function ListaPlanosTreinoPage() {
   const navigate = useNavigate();

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { atualizarPlanoTreino, listarPlanoTreinoPorId } from "../api/planoTreino";
-import { listarAlunos } from "../api/aluno";
-import { listarExercicios } from "../api/exercicio";
-import { AlunoDto } from "../api/types";
+import { atualizarPlanoTreino, listarPlanoTreinoPorId } from "../../api/planoTreino";
+import { listarAlunos } from "../../api/aluno";
+import { listarExercicios } from "../../api/exercicio";
+import { AlunoDto } from "../../api/types";
 
 export function AtualizarPlanoTreinoPage() {
   const { id } = useParams<{ id: string }>();
@@ -60,7 +60,7 @@ export function AtualizarPlanoTreinoPage() {
     ]);
   }
 
-  bin function removeExercicio(index: number) {
+  function removeExercicio(index: number) {
     const novaLista = [...exerciciosPlanejados];
     novaLista.splice(index, 1);
     setExerciciosPlanejados(novaLista);
