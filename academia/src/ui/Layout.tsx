@@ -24,7 +24,7 @@ export function Layout() {
           {auth && <Link to="/plano-treino">Planos de Treino</Link>}
           {auth && <Link to="/registro-treino">Registros de Treino</Link>}
 
-          {!auth && <Link to="/login">Login</Link>}
+          {auth && <Link to="/login">Login</Link>}
 
         </nav>
 

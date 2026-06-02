@@ -22,7 +22,11 @@ export function ListaPlanosTreinoPage() {
       setPlanos(listaPlanos);
       setAlunos(listaAlunos);
     } catch (err: any) {
-      setError(err?.response?.data?.message ?? err?.message ?? "Falha ao carregar dados");
+      setError(
+        err?.response?.data?.message ??
+          err?.message ??
+          "Falha ao carregar dados",
+      );
     } finally {
       setLoading(false);
     }
@@ -38,15 +42,29 @@ export function ListaPlanosTreinoPage() {
       await removerPlanoTreino(id);
       await carregarDados();
     } catch (err: any) {
-      setError(err?.response?.data?.message ?? err?.message ?? "Falha ao remover");
+      setError(
+        err?.response?.data?.message ?? err?.message ?? "Falha ao remover",
+      );
     }
   }
 
   return (
     <div className="page">
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
-        <h2 className="page-title" style={{ margin: 0 }}>Planos de Treino</h2>
-        <button className="btn-primary" onClick={() => navigate("/plano-treino/novo")}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          marginBottom: 20,
+        }}
+      >
+        <h2 className="page-title" style={{ margin: 0 }}>
+          Planos de Treino
+        </h2>
+        <button
+          className="btn-primary"
+          onClick={() => navigate("/plano-treino/novo")}
+        >
           Novo Plano
         </button>
       </div>
@@ -61,8 +79,23 @@ export function ListaPlanosTreinoPage() {
           return (
             <div key={p.id} className="list-item">
               <div>
-                <strong>{p.nomeTreino}</strong> <span className="muted">#{p.id}</span>
-                <div className="muted">Aluno: {alunoVinculado?.nome ?? p.alunoId}</div>
+                <strong>{p.nomeTreino}</strong>{" "}
+                <span className="muted">#{p.id}</span>
+                <div className="muted">
+                  Aluno: {alunoVinculado?.nome ?? p.alunoId}
+                </div>
+              </div>
+
+              <div style={{ marginTop: 8 }}>
+                <strong>Exercícios Planejados:</strong>
+                <ul style={{ margin: 0, paddingLeft: 20 }}>
+                  {p.exerciciosPlanejados?.map((ep, i) => (
+                    <li key={i} className="muted">
+                      {ep.nomeExercicio} | {ep.series} séries x {ep.repeticoes}{" "}
+                      repetições
+                    </li>
+                  ))}
+                </ul>
               </div>
 
               <div className="form-actions">

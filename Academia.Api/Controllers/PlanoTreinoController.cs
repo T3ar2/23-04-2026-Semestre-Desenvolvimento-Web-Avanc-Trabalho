@@ -30,7 +30,7 @@ public class PlanoTreinoController : ControllerBase
         {
             NomeTreino = dto.NomeTreino,
             AlunoId = dto.AlunoId,
-            ExerciciosPlanejados = new List<PlanoTreinoItem>() //linha Faltante
+            ExerciciosPlanejados = new List<PlanoTreinoItem>() 
         };
 
         foreach (var exercicio in dto.ExerciciosPlanejados)

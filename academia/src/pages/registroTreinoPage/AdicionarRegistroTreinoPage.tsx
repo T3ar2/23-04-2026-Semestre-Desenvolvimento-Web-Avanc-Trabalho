@@ -105,7 +105,7 @@ export function AdicionarRegistroTreinoPage() {
       const payload = {
         alunoId: Number(alunoId),
         planoTreinoId: planoTreinoId ? Number(planoTreinoId) : null,
-        dataExecucao: new Date(dataExecucao).toISOString(),
+        dataExecucao: `${dataExecucao}`,
         exerciciosRealizados: exerciciosRealizados.map((ex) => ({
           exercicioId: Number(ex.exercicioId),
           series: Number(ex.series),

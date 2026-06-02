@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\erick\\OneDrive\\Área de Trabalho\\erick - pessoal\\gymfront\\23-04-2026-Semestre-Desenvolvimento-Web-Avanc-Trabalho\\Academia.Api\\Academia.Api.csproj": {}
+    "C:\\Users\\erick\\OneDrive\\Área de Trabalho\\erick - pessoal\\gymrodandooback\\23-04-2026-Semestre-Desenvolvimento-Web-Avanc-Trabalho\\Academia.Api\\Academia.Api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\erick\\OneDrive\\Área de Trabalho\\erick - pessoal\\gymfront\\23-04-2026-Semestre-Desenvolvimento-Web-Avanc-Trabalho\\Academia.Api\\Academia.Api.csproj": {
+    "C:\\Users\\erick\\OneDrive\\Área de Trabalho\\erick - pessoal\\gymrodandooback\\23-04-2026-Semestre-Desenvolvimento-Web-Avanc-Trabalho\\Academia.Api\\Academia.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\erick\\OneDrive\\Área de Trabalho\\erick - pessoal\\gymfront\\23-04-2026-Semestre-Desenvolvimento-Web-Avanc-Trabalho\\Academia.Api\\Academia.Api.csproj",
+        "projectUniqueName": "C:\\Users\\erick\\OneDrive\\Área de Trabalho\\erick - pessoal\\gymrodandooback\\23-04-2026-Semestre-Desenvolvimento-Web-Avanc-Trabalho\\Academia.Api\\Academia.Api.csproj",
         "projectName": "Academia.Api",
-        "projectPath": "C:\\Users\\erick\\OneDrive\\Área de Trabalho\\erick - pessoal\\gymfront\\23-04-2026-Semestre-Desenvolvimento-Web-Avanc-Trabalho\\Academia.Api\\Academia.Api.csproj",
+        "projectPath": "C:\\Users\\erick\\OneDrive\\Área de Trabalho\\erick - pessoal\\gymrodandooback\\23-04-2026-Semestre-Desenvolvimento-Web-Avanc-Trabalho\\Academia.Api\\Academia.Api.csproj",
         "packagesPath": "C:\\Users\\erick\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\erick\\OneDrive\\Área de Trabalho\\erick - pessoal\\gymfront\\23-04-2026-Semestre-Desenvolvimento-Web-Avanc-Trabalho\\Academia.Api\\obj\\",
+        "outputPath": "C:\\Users\\erick\\OneDrive\\Área de Trabalho\\erick - pessoal\\gymrodandooback\\23-04-2026-Semestre-Desenvolvimento-Web-Avanc-Trabalho\\Academia.Api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\erick\\AppData\\Roaming\\NuGet\\NuGet.Config"
