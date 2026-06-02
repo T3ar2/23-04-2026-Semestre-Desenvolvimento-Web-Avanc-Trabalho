@@ -3,16 +3,17 @@ import { atualizarAluno, listarAlunoPorId } from "../../api/aluno";
 import "../../cssDeTeste/AlunoPage.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { AlunoDto } from "../../api/types";
+import { PatternFormat } from 'react-number-format';
 
 export function AtualizarAlunoPage() {
-  const { id } = useParams<{ id: string }>(); 
+  const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
   const [aluno, setAluno] = useState<AlunoDto | null>(null);
 
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-  
+
   const [nome, setNome] = useState("");
   const [cpf, setCpf] = useState("");
   const [email, setEmail] = useState("");
@@ -20,28 +21,29 @@ export function AtualizarAlunoPage() {
 
   useEffect(() => {
     async function carregarAluno() {
-      if (!id) return; 
-      
+      if (!id) return;
+
       setError(null);
       setLoading(true);
-      
+
       try {
         const dadosAluno = await listarAlunoPorId(Number(id));
         setAluno(dadosAluno);
         setNome(dadosAluno.nome);
-        setCpf(mascaraCpf(dadosAluno.cpf)); 
+        setCpf(dadosAluno.cpf);
         setEmail(dadosAluno.email);
-        
-        if (dadosAluno.nascimento) {
-            const dataFormatada = new Date(dadosAluno.nascimento).toISOString().split("T")[0];
-            setNascimento(dataFormatada);
-        }
 
+        if (dadosAluno.nascimento) {
+          const dataFormatada = new Date(dadosAluno.nascimento)
+            .toISOString()
+            .split("T")[0];
+          setNascimento(dataFormatada);
+        }
       } catch (err: any) {
         setError(
           err?.response?.data?.message ??
             err?.message ??
-            "Falha ao carregar os dados do aluno."
+            "Falha ao carregar os dados do aluno.",
         );
       } finally {
         setLoading(false);
@@ -60,7 +62,7 @@ export function AtualizarAlunoPage() {
     try {
       const payloadAluno = {
         nome,
-        cpf: cpf.replace(/\D/g, ""), 
+        cpf,
         email,
         nascimento: new Date(nascimento),
       };
@@ -71,22 +73,13 @@ export function AtualizarAlunoPage() {
       setError(
         err?.response?.data?.message ??
           err?.message ??
-          "Falha ao atualizar aluno."
+          "Falha ao atualizar aluno.",
       );
     }
   }
 
-  const mascaraCpf = (valor: string) => {
-    return valor
-      .replace(/\D/g, "")
-      .replace(/(\d{3})(\d)/, "$1.$2")
-      .replace(/(\d{3})(\d)/, "$1.$2")
-      .replace(/(\d{3})(\d{1,2})/, "$1-$2")
-      .replace(/(-\d{2})\d+?$/, "$1");
-  };
-
   if (loading) {
-      return <div className="loading">Carregando dados do aluno...</div>;
+    return <div className="loading">Carregando dados do aluno...</div>;
   }
 
   return (
@@ -112,12 +105,16 @@ export function AtualizarAlunoPage() {
 
           <div className="form-group">
             <label htmlFor="cpf">CPF</label>
-            <input
+            <PatternFormat
               id="cpf"
-              value={cpf}
-              maxLength={14}
-              onChange={(e) => setCpf(mascaraCpf(e.target.value))}
+              format="###.###.###-##"
+              mask="_"
               placeholder="000.000.000-00"
+              value={cpf}
+              onValueChange={(values) => {
+                setCpf(values.formattedValue);
+              }}
+              className="form-control"
             />
           </div>
         </div>
@@ -147,7 +144,11 @@ export function AtualizarAlunoPage() {
             Atualizar
           </button>
 
-          <button className="btn-danger" type="button" onClick={() => navigate("/lista-alunos")}>
+          <button
+            className="btn-danger"
+            type="button"
+            onClick={() => navigate("/lista-alunos")}
+          >
             Cancelar
           </button>
         </div>

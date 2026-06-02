@@ -1,5 +1,5 @@
 import { http } from "./http";
-import { PlanoTreinoDto, PlanoTreinoCreateDto } from "./types";
+import { PlanoTreinoDto, PlanoTreinoCreateDto, PlanoTreinoUpdateDto } from "./types";
 
 export async function listarPlanosTreino() {
   const { data } = await http.get<PlanoTreinoDto[]>('/api/PlanoTreino');
@@ -16,7 +16,7 @@ export async function criarPlanoTreino(payload: PlanoTreinoCreateDto) {
   return data;
 }
 
-export async function atualizarPlanoTreino(id: number, payload: PlanoTreinoCreateDto) {
+export async function atualizarPlanoTreino(id: number, payload: PlanoTreinoUpdateDto) {
   await http.put(`/api/PlanoTreino/${id}`, payload);
 }
 

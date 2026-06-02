@@ -14,13 +14,26 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
+//builder.Services.AddCors(options =>
+// {
+//     options.AddPolicy("PermitirTudo", policy =>
+//         policy.WithOrigins("http://localhost:3000")
+//               .AllowAnyHeader()
+//               .AllowAnyMethod());
+// });
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("PermitirTudo", policy =>
+    {
         policy.WithOrigins("http://localhost:3000")
+              .AllowAnyMethod()
               .AllowAnyHeader()
-              .AllowAnyMethod());
+              .AllowCredentials()
+              .AllowCredentials(); 
+    });
 });
+
 
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -83,7 +96,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection(); - Commitado por estar dando problema com o front
 app.UseCors("PermitirTudo");
 app.UseAuthentication();
 app.UseAuthorization();
