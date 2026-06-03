@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 namespace Academia.Api.Controllers;
 
-[Authorize]
+[AllowAnonymous]
 [ApiController]
 [Route("api/[controller]")]
 public class LoginController : ControllerBase
@@ -16,7 +16,7 @@ public class LoginController : ControllerBase
         ctx = context;
     }
 
-    [Authorize(Roles = "Admin")]
+    [AllowAnonymous]
     [HttpPost]
     public async Task<ActionResult<Usuario>> CreateAsync(LoginCreateDto dto)
     {

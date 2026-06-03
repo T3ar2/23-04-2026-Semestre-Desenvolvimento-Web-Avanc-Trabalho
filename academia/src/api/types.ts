@@ -4,6 +4,13 @@ export type LoginResponse = {
     usuario: string;
 }
 
+export type CadastroUsuarioPayload = {
+  nome: string;
+  login: string;
+  senhaHash: string;
+  role: string;
+}
+
 export type AlunoDto = {
     id: number;
     nome: string;

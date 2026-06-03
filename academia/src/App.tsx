@@ -2,6 +2,7 @@ import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { HomePage } from "./pages/HomePage";
 import { LoginPage } from "./pages/LoginPage";
+import { SignUpPage } from "./pages/SignUpPage";
 import { Layout } from "./ui/Layout";
 import { RequireAuth } from "./routes/RequireAuth";
 import { AdicionarAlunoPage } from "./pages/alunoPage/AdicionarAlunoPage";
@@ -25,6 +26,7 @@ function App() {
       <Route element={<Layout />}>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignUpPage />} />
         <Route
           path="/adiciona-aluno"
           element={

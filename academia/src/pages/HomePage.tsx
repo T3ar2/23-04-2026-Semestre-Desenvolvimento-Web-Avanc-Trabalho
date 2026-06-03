@@ -15,11 +15,7 @@ export function HomePage() {
         </p>
 
         <p className="muted">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-          Voluptatum, aliquam animi quibusdam, exercitationem expedita
-          molestiae, earum reiciendis minus facere veritatis eveniet.
-          Veniam tempora et rerum saepe aliquid repellendus laboriosam
-          consequatur.
+          Bem vindo! Cadastre-se ou faça login para acessar as funcionalidades de gerenciamento de alunos, exercícios, planos de treino e registros de treino.
         </p>
       </div>
     </div>
