@@ -1,0 +1,52 @@
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.header {
+  background-color: var(--navy);
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  position: relative;
+  z-index: 10;
+}
+
+.logo {
+  font-family: var(--font-logo);
+  font-size: var(--logo-size);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  line-height: 1;
+}
+
+.logo span.gym {
+  color: var(--white);
+  font-style: normal;
+}
+
+.logo span.flow {
+  color: var(--cyan);
+  font-style: italic;
+}
+
+.header-icons {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.header-icons a, .header-icons img {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.18s ease;
+}
+
+.header-icons a:hover, .header-icons img:hover {
+  transform: scale(1.12);
+}

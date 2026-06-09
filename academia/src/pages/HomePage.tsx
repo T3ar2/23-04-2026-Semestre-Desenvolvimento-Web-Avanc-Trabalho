@@ -1,22 +1,66 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import '../css/Home.css';
 
 export function HomePage() {
-  const baseUrl =
-    process.env.REACT_APP_API_BASE_URL ?? 'https://localhost:5001';
-
   return (
-    <div className="page">
+    <div className="hero">
+      <div className="cards-grid">
+        <Link to="/lista-alunos" className="card">
+          <div className="card-body">
+            <p className="card-description">
+              Acesso total aos perfis, histórico e informações de contato dos alunos
+            </p>
+            <div className="card-icon-placeholder">
+              icone_alunos.svg<br />(grupo de pessoas)
+            </div>
+          </div>
+          <div className="card-footer">
+            <span>Gerenciar <strong>Alunos</strong></span>
+          </div>
+        </Link>
 
-      <div className="card">
-      <h2 className="page-title">Home</h2>
-        <p>
-          <strong>URL da API:</strong>{' '}
-          <code>{baseUrl}</code>
-        </p>
+        <Link to="/plano-treino" className="card">
+          <div className="card-body">
+            <p className="card-description">
+              Crie, edite e personalize as rotinas semanais de treino para a sua equipe
+            </p>
+            <div className="card-icon-placeholder">
+              icone_planos.svg<br />(documento)
+            </div>
+          </div>
+          <div className="card-footer">
+            <span><strong>Planos</strong> de Treino</span>
+          </div>
+        </Link>
 
-        <p className="muted">
-          Bem vindo! Cadastre-se ou faça login para acessar as funcionalidades de gerenciamento de alunos, exercícios, planos de treino e registros de treino.
-        </p>
+        <Link to="/lista-exercicios" className="card">
+          <div className="card-body">
+            <p className="card-description">
+              Mantenha um catálogo completo de exercícios com detalhes técnicos e vídeos
+            </p>
+            <div className="card-icon-placeholder">
+              icone_exercicios.svg<br />(haltere)
+            </div>
+          </div>
+          <div className="card-footer">
+            <span>Biblioteca de <strong>Exercícios</strong></span>
+          </div>
+        </Link>
+
+        <Link to="/registro-treino" className="card">
+          <div className="card-body">
+            <p className="card-description">
+              Monitore a frequência e o desempenho dos alunos nos treinos agendados
+            </p>
+            <div className="card-icon-placeholder">
+              icone_registro.svg<br />(arquivo/caixa)
+            </div>
+          </div>
+          <div className="card-footer">
+            <span><strong>Registro</strong> de Treinos</span>
+          </div>
+        </Link>
       </div>
     </div>
   );

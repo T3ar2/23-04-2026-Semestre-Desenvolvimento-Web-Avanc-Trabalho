@@ -1,13 +1,57 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,700;1,700&family=Nunito:wght@400;700&display=swap');
+
+/* @font-face {
+  font-family: 'Agrandir';
+  src: url('../fonts/Agrandir-Regular.woff2') format('woff2');
+  font-weight: 400;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@font-face {
+  font-family: 'Agrandir';
+  src: url('../fonts/Agrandir-Bold.woff2') format('woff2');
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: 'Garet';
+  src: url('../fonts/Garet-Book.woff2') format('woff2');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Garet';
+  src: url('../fonts/Garet-Heavy.woff2') format('woff2');
+  font-weight: 700;
+} */
+ 
+
+:root {
+  --navy: #1a3d8b;
+  --cyan: #5ce1e6;
+  --orange: #f47c20;
+  --white: #ffffff;
+  --text-muted: #989d9d;
+  /* --font-logo: 'Agrandir', 'Montserrat', sans-serif;
+  --font-body: 'Garet', 'Nunito', sans-serif; */
+  --font-logo: 'Montserrat', sans-serif;
+  --font-body: 'Nunito', sans-serif;
+  --logo-size: 26.7px;
+  --card-desc: 9px;
+  --card-label: 16.5px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  font-family: var(--font-body);
+}
+
+main {
+  flex: 1;
+  padding: 0 !important;
 }

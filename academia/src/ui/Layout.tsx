@@ -1,54 +1,43 @@
 import React from 'react';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { isAuthenticated, logout } from '../api/auth';
-import '../cssDeTeste/HeaderLayout.css';
+import '../css/Header.css';
 
 export function Layout() {
   const navigate = useNavigate();
   const auth = isAuthenticated();
-  const nome = localStorage.getItem('nome');
 
   return (
     <div className="app-container">
-      <header className="app-header">
-        <div className="app-brand">
-          React API
-        </div>
+      <header className="header">
+        <Link to="/" className="logo">
+          <span className="gym">GYM</span>
+          <span className="flow">FLOW</span>
+        </Link>
 
-        <nav className="app-nav">
-          <Link to="/">Home</Link>
+        <nav className="header-icons">
+          <Link to="/" title="Home">
+            <img src="../imgs/icone_home.svg" alt="Home" width="28" height="28" />
+          </Link>
 
-          {auth && <Link to="/lista-alunos">Lista de Alunos</Link>}
-          {auth && <Link to="/lista-exercicios">Lista de Exercícios</Link>}
-
-          {auth && <Link to="/plano-treino">Planos de Treino</Link>}
-          {auth && <Link to="/registro-treino">Registros de Treino</Link>}
-
-          {!auth && <Link to="/login">Login</Link>}
-          {!auth && <Link to="/signup">Cadastrar</Link>}
-
-        </nav>
-
-        <div className="app-user">
-          {auth && (
-            <span className="app-user-name">
-              Olá, {nome ?? 'usuário'}
-            </span>
-          )}
-
-          {auth && (
-            <button
-              className="btn-danger"
-              type="button"
+          {!auth ? (
+            <Link to="/login" title="Entrar">
+              <img src="../imgs/icone_login.svg" alt="Entrar" width="28" height="28" />
+            </Link>
+          ) : (
+            <img 
+              src="../imgs/icone_logout.svg" 
+              alt="Sair" 
+              width="28" 
+              height="28" 
+              style={{ cursor: 'pointer' }}
               onClick={() => {
                 logout();
                 navigate('/login');
-              }}
-            >
-              Sair
-            </button>
+              }} 
+            />
           )}
-        </div>
+        </nav>
       </header>
       <main>
         <Outlet />

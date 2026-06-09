@@ -3,7 +3,7 @@ import { atualizarAluno, listarAlunoPorId } from "../../api/aluno";
 import "../../cssDeTeste/AlunoPage.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { AlunoDto } from "../../api/types";
-import { PatternFormat } from 'react-number-format';
+    // import { PatternFormat } from 'react-number-format';
 
 export function AtualizarAlunoPage() {
   const { id } = useParams<{ id: string }>();
@@ -52,6 +52,15 @@ export function AtualizarAlunoPage() {
 
     void carregarAluno();
   }, [id]);
+
+  function formatarCpf(valor: string) {
+    let v = valor.replace(/\D/g, "");
+    if (v.length > 11) v = v.slice(0, 11);
+    v = v.replace(/(\d{3})(\d)/, "$1.$2");
+    v = v.replace(/(\d{3})(\d)/, "$1.$2");
+    v = v.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+    return v;
+  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -105,7 +114,7 @@ export function AtualizarAlunoPage() {
 
           <div className="form-group">
             <label htmlFor="cpf">CPF</label>
-            <PatternFormat
+            {/* <PatternFormat
               id="cpf"
               format="###.###.###-##"
               mask="_"
@@ -115,7 +124,15 @@ export function AtualizarAlunoPage() {
                 setCpf(values.formattedValue);
               }}
               className="form-control"
+            /> */
+            <input
+              id="cpf"
+              placeholder="000.000.000-00"
+              value={cpf}
+              onChange={(e) => setCpf(formatarCpf(e.target.value))}
+              className="form-control"
             />
+            }
           </div>
         </div>
 
