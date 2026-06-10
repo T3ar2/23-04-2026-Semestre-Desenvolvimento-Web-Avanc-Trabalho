@@ -15,6 +15,22 @@
   z-index: 10;
 }
 
+.header-text-link {
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  transition: background 0.18s ease, color 0.18s ease;
+}
+
+.header-text-link:hover {
+  background: rgba(92, 225, 230, 0.15);
+  color: var(--cyan);
+}
+
 .logo {
   font-family: var(--font-logo);
   font-size: var(--logo-size);

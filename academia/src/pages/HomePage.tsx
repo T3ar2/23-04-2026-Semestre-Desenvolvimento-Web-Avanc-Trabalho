@@ -1,6 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../css/Home.css';
+import iconeAlunos from '../imgs/icone_alunos.png';
+import iconePlanos from '../imgs/icone_planos.png';
+import iconeExercicios from '../imgs/icone_exercicios.png';
+import iconeRegistro from '../imgs/icone_registros.png';
 
 export function HomePage() {
   return (
@@ -11,9 +15,7 @@ export function HomePage() {
             <p className="card-description">
               Acesso total aos perfis, histórico e informações de contato dos alunos
             </p>
-            <div className="card-icon-placeholder">
-              icone_alunos.svg<br />(grupo de pessoas)
-            </div>
+            <img src={iconeAlunos} alt="Ícone de Alunos" className="card-icon" />
           </div>
           <div className="card-footer">
             <span><strong>Gerenciar Alunos</strong></span>
@@ -25,9 +27,7 @@ export function HomePage() {
             <p className="card-description">
               Crie, edite e personalize as rotinas semanais de treino para a sua equipe
             </p>
-            <div className="card-icon-placeholder">
-              icone_planos.svg<br />(documento)
-            </div>
+            <img src={iconePlanos} alt="Ícone de Planos" className="card-icon" />
           </div>
           <div className="card-footer">
             <span><strong>Planos de Treino</strong></span>
@@ -39,9 +39,7 @@ export function HomePage() {
             <p className="card-description">
               Mantenha um catálogo completo de exercícios com detalhes técnicos e vídeos
             </p>
-            <div className="card-icon-placeholder">
-              icone_exercicios.svg<br />(haltere)
-            </div>
+            <img src={iconeExercicios} alt="Ícone de Exercícios" className="card-icon" />
           </div>
           <div className="card-footer">
             <span><strong>Biblioteca de Exercícios</strong></span>
@@ -53,9 +51,7 @@ export function HomePage() {
             <p className="card-description">
               Monitore a frequência e o desempenho dos alunos nos treinos agendados
             </p>
-            <div className="card-icon-placeholder">
-              icone_registro.svg<br />(arquivo/caixa)
-            </div>
+            <img src={iconeRegistro} alt="Ícone de Registro de Treinos" className="card-icon" />
           </div>
           <div className="card-footer">
             <span><strong>Registro de Treinos</strong></span>

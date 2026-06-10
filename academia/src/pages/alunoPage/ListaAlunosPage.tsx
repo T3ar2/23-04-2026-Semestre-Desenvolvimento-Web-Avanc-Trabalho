@@ -50,7 +50,7 @@ export function ListaAlunosPage() {
         <div className="panel-header">
           <h1 className="panel-title">Gerenciar <strong>Alunos</strong></h1>
           <p className="panel-subtitle">Acesso total aos perfis, histórico e informações de contato dos alunos</p>
-          <button className="panel-close" title="Fechar" onClick={() => navigate(-1)}>✕</button>
+          <button className="panel-close" title="Fechar" onClick={() => navigate('/')}>✕</button>
         </div>
 
         <div className="panel-body">

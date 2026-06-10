@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { register } from '../api/signup';
+import '../css/SignUp.css';
 
 export function SignUpPage() {
   const navigate = useNavigate();
@@ -30,52 +31,61 @@ export function SignUpPage() {
   }
 
   return (
-    <div className="page">
-      <form className="card" onSubmit={handleSubmit} style={{ maxWidth: 420 }}>
-        <h2 className="page-title">Cadastro</h2>
-
-        <div className="form-group">
-          <label htmlFor="nome">Nome</label>
-          <input
-            id="nome"
-            value={nome}
-            onChange={(e) => setNome(e.target.value)}
-            autoComplete="name"
-          />
+    <div className="signup-body">
+      <form className="signup-card" onSubmit={handleSubmit}>
+        <div className="signup-header">
+          <h2 className="signup-title">Cadastro de Usuário</h2>
         </div>
 
-        <div className="form-group">
-          <label htmlFor="login">Usuário</label>
-          <input
-            id="login"
-            value={loginValue}
-            onChange={(e) => setLoginValue(e.target.value)}
-            autoComplete="username"
-          />
+        <div className="signup-content">
+          <div className="signup-group">
+            <label className="signup-label" htmlFor="nome">Nome Completo</label>
+            <input
+              id="nome"
+              className="signup-input"
+              value={nome}
+              onChange={(e) => setNome(e.target.value)}
+              autoComplete="name"
+              required
+            />
+          </div>
+
+          <div className="signup-group">
+            <label className="signup-label" htmlFor="login">Usuário</label>
+            <input
+              id="login"
+              className="signup-input"
+              value={loginValue}
+              onChange={(e) => setLoginValue(e.target.value)}
+              autoComplete="username"
+              required
+            />
+          </div>
+
+          <div className="signup-group">
+            <label className="signup-label" htmlFor="senha">Senha</label>
+            <input
+              id="senha"
+              type="password"
+              className="signup-input"
+              value={senha}
+              onChange={(e) => setSenha(e.target.value)}
+              autoComplete="new-password"
+              required
+            />
+          </div>
         </div>
 
-        <div className="form-group">
-          <label htmlFor="senha">Senha</label>
-          <input
-            id="senha"
-            type="password"
-            value={senha}
-            onChange={(e) => setSenha(e.target.value)}
-            autoComplete="new-password"
-          />
-        </div>
-
-        <div className="form-actions">
+        <div className="signup-footer">
           <button
-            className="btn-primary"
+            className="btn-signup"
             type="submit"
             disabled={loading}
           >
             {loading ? 'Cadastrando...' : 'Cadastrar'}
           </button>
+          {error && <div className="signup-error">{error}</div>}
         </div>
-
-        {error && <div className="form-error">{error}</div>}
       </form>
     </div>
   );

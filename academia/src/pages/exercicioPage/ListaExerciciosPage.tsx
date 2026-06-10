@@ -42,7 +42,7 @@ export function ListaExerciciosPage() {
         <div className="panel-header">
           <h1 className="panel-title">Biblioteca de <strong>Exercícios</strong></h1>
           <p className="panel-subtitle">Mantenha um catálogo completo de exercícios com detalhes técnicos e vídeos</p>
-          <button className="panel-close" title="Fechar" onClick={() => navigate(-1)}>✕</button>
+          <button className="panel-close" title="Fechar" onClick={() => navigate('/')}>✕</button>
         </div>
 
         <div className="panel-body">

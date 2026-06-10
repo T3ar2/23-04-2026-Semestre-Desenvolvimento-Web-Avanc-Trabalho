@@ -59,7 +59,7 @@ export function ListaPlanosTreinoPage() {
       <div className="card">
         <div className="card-header">
           <div className="card-header-left">
-            <button type="button" className="btn-back" title="Voltar" onClick={() => navigate(-1)}>
+            <button type="button" className="btn-back" title="Voltar" onClick={() => navigate('/')}>
               <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" /></svg>
             </button>
             <span className="card-title"><strong>Planos</strong> de treino</span>
@@ -68,7 +68,7 @@ export function ListaPlanosTreinoPage() {
           <button type="button" className="btn-close" title="Fechar" onClick={() => navigate('/')}>✕</button>
         </div>
 
-        <div className="card-body">
+        <div className="list-body">
           <button className="btn-new" onClick={() => navigate("/plano-treino/novo")}>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="12" cy="12" r="10" />

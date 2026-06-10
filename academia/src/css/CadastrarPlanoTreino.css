@@ -13,6 +13,7 @@
   max-width: 1060px;
   overflow: hidden;
   box-shadow: 0 8px 40px rgba(0,0,0,0.28);
+  min-height: calc(100vh - 160px);
 }
 
 .card-header {
@@ -237,6 +238,7 @@
   padding: 20px 40px 20px;
   display: flex;
   justify-content: center;
+  background: none;
 }
 
 .btn-cadastrar {

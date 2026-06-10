@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../api/auth';
+import '../css/Login.css';
 
 export function LoginPage() {
   const navigate = useNavigate();
@@ -29,42 +30,49 @@ export function LoginPage() {
   }
 
   return (
-    <div className="page">
-      <form className="card" onSubmit={handleSubmit} style={{ maxWidth: 420 }}>
-        <h2 className="page-title">Login</h2>
-
-        <div className="form-group">
-          <label htmlFor="login">Usuário</label>
-          <input
-            id="login"
-            value={loginValue}
-            onChange={(e) => setLoginValue(e.target.value)}
-            autoComplete="username"
-          />
+    <div className="login-body">
+      <form className="login-card" onSubmit={handleSubmit}>
+        <div className="login-header">
+          <h2 className="login-title">Acesso ao Sistema</h2>
         </div>
 
-        <div className="form-group">
-          <label htmlFor="senha">Senha</label>
-          <input
-            id="senha"
-            type="password"
-            value={senha}
-            onChange={(e) => setSenha(e.target.value)}
-            autoComplete="current-password"
-          />
+        <div className="login-content">
+          <div className="login-group">
+            <label className="login-label" htmlFor="login">Usuário</label>
+            <input
+              id="login"
+              className="login-input"
+              value={loginValue}
+              onChange={(e) => setLoginValue(e.target.value)}
+              autoComplete="username"
+              required
+            />
+          </div>
+
+          <div className="login-group">
+            <label className="login-label" htmlFor="senha">Senha</label>
+            <input
+              id="senha"
+              type="password"
+              className="login-input"
+              value={senha}
+              onChange={(e) => setSenha(e.target.value)}
+              autoComplete="current-password"
+              required
+            />
+          </div>
         </div>
 
-        <div className="form-actions">
+        <div className="login-footer">
           <button
-            className="btn-primary"
+            className="btn-login"
             type="submit"
             disabled={loading}
           >
             {loading ? 'Entrando...' : 'Entrar'}
           </button>
+          {error && <div className="login-error">{error}</div>}
         </div>
-
-        {error && <div className="form-error">{error}</div>}
       </form>
     </div>
   );
