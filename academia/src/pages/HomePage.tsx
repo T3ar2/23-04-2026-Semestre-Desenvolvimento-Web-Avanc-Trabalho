@@ -16,7 +16,7 @@ export function HomePage() {
             </div>
           </div>
           <div className="card-footer">
-            <span>Gerenciar <strong>Alunos</strong></span>
+            <span><strong>Gerenciar Alunos</strong></span>
           </div>
         </Link>
 
@@ -30,7 +30,7 @@ export function HomePage() {
             </div>
           </div>
           <div className="card-footer">
-            <span><strong>Planos</strong> de Treino</span>
+            <span><strong>Planos de Treino</strong></span>
           </div>
         </Link>
 
@@ -44,7 +44,7 @@ export function HomePage() {
             </div>
           </div>
           <div className="card-footer">
-            <span>Biblioteca de <strong>Exercícios</strong></span>
+            <span><strong>Biblioteca de Exercícios</strong></span>
           </div>
         </Link>
 
@@ -58,7 +58,7 @@ export function HomePage() {
             </div>
           </div>
           <div className="card-footer">
-            <span><strong>Registro</strong> de Treinos</span>
+            <span><strong>Registro de Treinos</strong></span>
           </div>
         </Link>
       </div>

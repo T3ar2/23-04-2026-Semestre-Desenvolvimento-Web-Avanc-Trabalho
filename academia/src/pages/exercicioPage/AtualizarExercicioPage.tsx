@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "../../cssDeTeste/AlunoPage.css";
+import "../../css/AtualizarExercicio.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { ExercicioDto } from "../../api/types";
 import { atualizarExercicio, listarExercicioPorId } from "../../api/exercicio";
@@ -70,48 +70,55 @@ export function AtualizarExercicioPage() {
   }
 
   return (
-    <div className="page">
-      <h2 className="page-title">Atualizar Exercicio</h2>
-
-      <form className="card" onSubmit={handleSubmit}>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "2fr 1fr",
-            gap: 12,
-          }}
-        >
-          <div className="form-group">
-            <label htmlFor="nome">Nome</label>
-            <input
-              id="nome"
-              value={nome}
-              onChange={(e) => setNome(e.target.value)}
-            />
+    <div className="page-body">
+      <div className="card">
+        <div className="card-header">
+          <div className="card-header-left">
+            <button type="button" className="btn-back" title="Voltar" onClick={() => navigate(-1)}>
+              <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" /></svg>
+            </button>
+            <span className="card-title"><strong>Atualizar</strong> exercício</span>
           </div>
-
-          <div className="form-group">
-            <label htmlFor="grupoMuscular">Grupo Muscular</label>
-            <input
-              id="grupoMuscular"
-              value={grupoMuscular}
-              onChange={(e) => setGrupoMuscular(e.target.value)}
-            />
-          </div>
+          <span className="card-subtitle">Mantenha o catálogo de exercícios atualizado</span>
+          <button type="button" className="btn-close" title="Fechar" onClick={() => navigate('/lista-exercicios')}>✕</button>
         </div>
 
-        <div className="form-actions">
-          <button className="btn-primary" type="submit" disabled={!nome.trim()}>
-            Atualizar
-          </button>
+        <form onSubmit={handleSubmit}>
+          <div className="card-body">
+            <div className="form-group">
+              <label className="form-label" htmlFor="nome">Nome do Exercício:</label>
+              <input
+                id="nome"
+                type="text"
+                className="form-input"
+                value={nome}
+                onChange={(e) => setNome(e.target.value)}
+                required
+              />
+            </div>
 
-          <button className="btn-danger" type="button" onClick={() => navigate("/lista-exercicios")}>
-            Cancelar
-          </button>
-        </div>
-      </form>
+            <div className="form-group">
+              <label className="form-label" htmlFor="grupoMuscular">Grupo Muscular:</label>
+              <input
+                id="grupoMuscular"
+                type="text"
+                className="form-input"
+                value={grupoMuscular}
+                maxLength={200}
+                onChange={(e) => setGrupoMuscular(e.target.value)}
+                required
+              />
+            </div>
+          </div>
 
-      {error && <div className="form-error">{error}</div>}
+          <div className="card-footer">
+            <button className="btn-cadastrar" type="submit" disabled={!nome.trim() || !grupoMuscular.trim()}>
+              Atualizar
+            </button>
+          </div>
+        </form>
+      </div>
+      {error && <div className="form-error" style={{ position: 'absolute', bottom: 20 }}>{error}</div>}
     </div>
   );
 }

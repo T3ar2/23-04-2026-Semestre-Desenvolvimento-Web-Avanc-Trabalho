@@ -5,6 +5,7 @@ import { listarAlunos } from "../../api/aluno";
 import { listarExercicios } from "../../api/exercicio";
 import { listarPlanosTreino, listarPlanoTreinoPorId } from "../../api/planoTreino";
 import { AlunoDto, PlanoTreinoDto } from "../../api/types";
+import "../../css/RegistrarTreino.css";
 
 export function AdicionarRegistroTreinoPage() {
   const navigate = useNavigate();
@@ -122,151 +123,155 @@ export function AdicionarRegistroTreinoPage() {
   }
 
   return (
-    <div className="page">
-      <h2 className="page-title">Novo Registro de Treino</h2>
-
-      <form className="card" onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="alunoId">Aluno</label>
-          <select
-            id="alunoId"
-            value={alunoId}
-            onChange={(e) => setAlunoId(Number(e.target.value))}
-            required
-          >
-            <option value="">Selecione um aluno</option>
-            {alunos.map((a) => (
-              <option key={a.id} value={a.id}>
-                {a.nome}
-              </option>
-            ))}
-          </select>
+    <div className="page-body">
+      <div className="card">
+        <div className="card-header">
+          <div className="card-header-left">
+            <button className="btn-back" title="Voltar" onClick={() => navigate(-1)}>
+              <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" /></svg>
+            </button>
+            <span className="card-title"><strong>Registrar</strong> execução de treino</span>
+          </div>
+          <span className="card-subtitle">Monitore a frequência e o desempenho dos alunos nos treinos agendados</span>
+          <button className="btn-close" title="Fechar" onClick={() => navigate('/registro-treino')}>✕</button>
         </div>
 
-        <div className="form-group">
-          <label htmlFor="planoTreinoId">Plano de Treino</label>
-          <select
-            id="planoTreinoId"
-            value={planoTreinoId}
-            onChange={(e) => handlePlanoTreinoChange(e.target.value)}
-          >
-            <option value="">Nenhum</option>
-            {planosTreino
-              .filter((p) => p.alunoId === alunoId || !alunoId)
-              .map((p) => (
-                <option key={p.id} value={p.id}>
-                  {p.nomeTreino}
-                </option>
-              ))}
-          </select>
-        </div>
+        <form onSubmit={handleSubmit}>
+          <div className="card-body">
+            <div style={{ display: "flex", flexDirection: "column", gap: "22px" }}>
+              <div className="form-group">
+                <label className="form-label" htmlFor="alunoId">Aluno selecionado:</label>
+                <select
+                  id="alunoId"
+                  className="form-input"
+                  value={alunoId}
+                  onChange={(e) => setAlunoId(Number(e.target.value))}
+                  required
+                >
+                  <option value="">Selecione um aluno</option>
+                  {alunos.map((a) => (
+                    <option key={a.id} value={a.id}>{a.nome}</option>
+                  ))}
+                </select>
+              </div>
 
-        <div className="form-group">
-          <label htmlFor="dataExecucao">Data de Execução</label>
-          <input
-            id="dataExecucao"
-            type="datetime-local"
-            value={dataExecucao}
-            onChange={(e) => setDataExecucao(e.target.value)}
-            required
-          />
-        </div>
+              <div className="form-group">
+                <label className="form-label" htmlFor="dataExecucao">Data e hora do treino:</label>
+                <input
+                  id="dataExecucao"
+                  type="datetime-local"
+                  className="form-input"
+                  value={dataExecucao}
+                  onChange={(e) => setDataExecucao(e.target.value)}
+                  required
+                />
+              </div>
 
-        <h3>Exercícios Realizados</h3>
-        {exerciciosRealizados.map((item, index) => (
-          <div
-            key={index}
-            style={{
-              display: "grid",
-              gridTemplateColumns: "2fr 1fr 1fr 1fr auto",
-              gap: 12,
-              marginBottom: 12,
-            }}
-          >
-            <select
-              value={item.exercicioId}
-              onChange={(e) =>
-                updateExercicio(index, "exercicioId", e.target.value)
-              }
-              required
-            >
-              <option value="">Selecione o exercício</option>
-              {exercicios.map((ex) => (
-                <option key={ex.id} value={ex.id}>
-                  {ex.nome}
-                </option>
-              ))}
-            </select>
+              <div className="form-group">
+                <label className="form-label" htmlFor="planoTreinoId">Treino realizado (Opcional):</label>
+                <select
+                  id="planoTreinoId"
+                  className="form-input"
+                  value={planoTreinoId}
+                  onChange={(e) => handlePlanoTreinoChange(e.target.value)}
+                >
+                  <option value="">Treino Avulso / Nenhum</option>
+                  {planosTreino
+                    .filter((p) => p.alunoId === alunoId || !alunoId)
+                    .map((p) => (
+                      <option key={p.id} value={p.id}>{p.nomeTreino}</option>
+                    ))}
+                </select>
+              </div>
+            </div>
 
-            <input
-              type="number"
-              min="1"
-              placeholder="Séries"
-              value={item.series || ""}
-              onChange={(e) => updateExercicio(index, "series", e.target.value)}
-              required
-            />
+            <div className="exercises-section">
+              <span className="exercises-title">Detalhes dos exercícios</span>
 
-            <input
-              type="number"
-              min="1"
-              placeholder="Repetições"
-              value={item.repeticoes || ""}
-              onChange={(e) =>
-                updateExercicio(index, "repeticoes", e.target.value)
-              }
-              required
-            />
+              <div className="table-wrapper">
+                <div className="table-head">
+                  <span>Exercício</span>
+                  <span>Séries</span>
+                  <span>Repetições</span>
+                  <span>Carga</span>
+                  <span></span>
+                </div>
 
-            <input
-              type="number"
-              min="0"
-              step="0.1"
-              placeholder="Carga (kg)"
-              value={item.carga || ""}
-              onChange={(e) => updateExercicio(index, "carga", e.target.value)}
-              required
-            />
+                <div className="table-body">
+                  {exerciciosRealizados.map((item, index) => (
+                    <div key={index} className="exercise-row">
+                      <select
+                        className="exercise-input exercise-name-input"
+                        value={item.exercicioId}
+                        onChange={(e) => updateExercicio(index, "exercicioId", e.target.value)}
+                        required
+                      >
+                        <option value="">Selecione...</option>
+                        {exercicios.map((ex) => (
+                          <option key={ex.id} value={ex.id}>{ex.nome}</option>
+                        ))}
+                      </select>
 
-            <button
-              type="button"
-              className="btn-danger"
-              onClick={() => removeExercicio(index)}
-            >
-              X
+                      <input
+                        type="number"
+                        className="exercise-input"
+                        min="1"
+                        placeholder="—"
+                        value={item.series || ""}
+                        onChange={(e) => updateExercicio(index, "series", e.target.value)}
+                        required
+                      />
+
+                      <input
+                        type="number"
+                        className="exercise-input"
+                        min="1"
+                        placeholder="—"
+                        value={item.repeticoes || ""}
+                        onChange={(e) => updateExercicio(index, "repeticoes", e.target.value)}
+                        required
+                      />
+
+                      <input
+                        type="number"
+                        className="exercise-input"
+                        min="0"
+                        step="0.5"
+                        placeholder="kg"
+                        value={item.carga || ""}
+                        onChange={(e) => updateExercicio(index, "carga", e.target.value)}
+                        required
+                      />
+
+                      <button
+                        type="button"
+                        className="btn-delete-row"
+                        onClick={() => removeExercicio(index)}
+                      >
+                        X
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <button type="button" className="btn-add-row" onClick={addExercicio}>
+                <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" /></svg>
+                Adicionar exercício
+              </button>
+            </div>
+          </div>
+
+          <div className="card-footer">
+            <button className="btn-register" type="submit" disabled={!alunoId || !dataExecucao || loading}>
+              Registrar
             </button>
           </div>
-        ))}
+        </form>
 
-        <button
-          type="button"
-          className="btn-outline"
-          onClick={addExercicio}
-          style={{ marginBottom: 20 }}
-        >
-          + Adicionar Exercício
-        </button>
-
-        <div className="form-actions">
-          <button
-            className="btn-primary"
-            type="submit"
-            disabled={!alunoId || !dataExecucao || loading}
-          >
-            Salvar Registro
-          </button>
-          <button
-            className="btn-secondary"
-            type="button"
-            onClick={() => navigate("/registro-treino")}
-          >
-            Cancelar
-          </button>
-        </div>
-      </form>
-
-      {error && <div className="form-error">{error}</div>}
-      {loading && <div className="loading">Carregando...</div>}
+      </div>
+      {error && <div className="form-error" style={{ position: 'absolute', bottom: 20 }}>{error}</div>}
+      {loading && <div className="loading" style={{ position: 'absolute', bottom: 20 }}>Carregando...</div>}
     </div>
   );
 }

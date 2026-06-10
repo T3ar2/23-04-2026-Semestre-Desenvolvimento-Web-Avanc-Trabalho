@@ -4,7 +4,7 @@ import {
   criarAluno,
   listarAlunos,
 } from "../../api/aluno";
-import "../../cssDeTeste/AlunoPage.css";
+import "../../css/CadastrarAluno.css";
 import { useNavigate } from "react-router-dom";
 
 export function AdicionarAlunoPage() {
@@ -87,70 +87,81 @@ export function AdicionarAlunoPage() {
   };
 
   return (
-    <div className="page">
-      <h2 className="page-title">Adicionar novo Aluno</h2>
-
-      <form className="card" onSubmit={handleSubmit}>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "2fr 1fr",
-            gap: 12,
-          }}
-        >
-          <div className="form-group">
-            <label htmlFor="nome">Nome</label>
-            <input
-              id="nome"
-              value={nome}
-              onChange={(e) => setNome(e.target.value)}
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="cpf">CPF</label>
-            <input
-              id="cpf"
-              value={cpf}
-              maxLength={14}
-              onChange={(e) => setCpf(mascaraCpf(e.target.value))}
-              placeholder="000.000.000-00"
-            />
-          </div>
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="email">Email</label>
-          <input
-            id="email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="nascimento">Data de Nascimento</label>
-          <input
-            id="nascimento"
-            type="date"
-            value={nascimento}
-            onChange={(e) => setNascimento(e.target.value)}
-          />
-        </div>
-
-        <div className="form-actions">
-          <button className="btn-primary" type="submit" disabled={!nome.trim()}>
-            {"Criar"}
-          </button>
-
-            <button className="btn-danger" type="button" onClick={() => navigate("/lista-alunos")}>
-              Cancelar
+    <div className="page-body">
+      <div className="card">
+        <div className="card-header">
+          <div className="card-header-left">
+            <button type="button" className="btn-back" title="Voltar" onClick={() => navigate(-1)}>
+              <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" /></svg>
             </button>
+            <span className="card-title"><strong>Cadastrar</strong> novo aluno</span>
+          </div>
+          <span className="card-subtitle">Acesso total aos perfis, histórico e informações de contato dos alunos</span>
+          <button type="button" className="btn-close" title="Fechar" onClick={() => navigate('/lista-alunos')}>✕</button>
         </div>
-      </form>
 
-      {error && <div className="form-error">{error}</div>}
+        <form onSubmit={handleSubmit}>
+          <div className="card-body">
+            <div className="form-group">
+              <label className="form-label" htmlFor="nome">Nome completo:</label>
+              <input
+                id="nome"
+                type="text"
+                className="form-input"
+                value={nome}
+                onChange={(e) => setNome(e.target.value)}
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label className="form-label" htmlFor="email">E-mail:</label>
+              <input
+                id="email"
+                type="email"
+                className="form-input"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+
+            <div className="form-row">
+              <div className="form-group">
+                <label className="form-label" htmlFor="nascimento">Data de Nascimento:</label>
+                <input
+                  id="nascimento"
+                  type="date"
+                  className="form-input"
+                  value={nascimento}
+                  onChange={(e) => setNascimento(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label className="form-label" htmlFor="cpf">CPF:</label>
+                <input
+                  id="cpf"
+                  type="text"
+                  className="form-input"
+                  value={cpf}
+                  maxLength={14}
+                  onChange={(e) => setCpf(mascaraCpf(e.target.value))}
+                  placeholder="000.000.000-00"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="card-footer">
+            <button type="submit" className="btn-cadastrar" disabled={!nome.trim()}>
+              Cadastrar
+            </button>
+          </div>
+        </form>
+      </div>
+      {error && <div className="form-error" style={{ position: 'absolute', bottom: 20 }}>{error}</div>}
     </div>
   );
 }
