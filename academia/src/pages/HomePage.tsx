@@ -15,7 +15,7 @@ export function HomePage() {
             <p className="gf-action-desc">
               Acesso total aos perfis, histórico e informações de contato dos alunos
             </p>
-            <img src={iconeAlunos} alt="Ícone de Alunos" className="gf-action-icon" />
+            <img src={iconeAlunos} alt="Ícone de Alunos" className="gf-action-icon-alunos" />
           </div>
           <div className="gf-action-footer">
             <span className="gf-action-title"><strong>Gerenciar Alunos</strong></span>
@@ -27,7 +27,7 @@ export function HomePage() {
             <p className="gf-action-desc">
               Crie, edite e personalize as rotinas semanais de treino para a sua equipe
             </p>
-            <img src={iconePlanos} alt="Ícone de Planos" className="gf-action-icon" />
+            <img src={iconePlanos} alt="Ícone de Planos" className="gf-action-icon-planos" />
           </div>
           <div className="gf-action-footer">
             <span className="gf-action-title"><strong>Planos de Treino</strong></span>

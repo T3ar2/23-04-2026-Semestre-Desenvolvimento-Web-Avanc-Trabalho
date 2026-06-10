@@ -5,6 +5,8 @@
   width: 100%;
   max-width: 1140px;
   min-height: calc(100vh - 160px);
+  margin:auto;
+  margin-top: 50px;
 }
 
 .panel-header {
